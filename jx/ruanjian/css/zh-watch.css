@@ -1,0 +1,130 @@
+body{
+    font-family: "微软雅黑";
+    font-size:14px;
+}
+ul,ol{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+a{
+    text-decoration: none;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.zh-header{
+    height:30px;
+    margin-top:20px;
+    color:#434343;
+    font-size:14px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.zh-header > span{
+    display: inline-block;
+    margin-right:20px;
+}
+
+.green{
+    font-size:16px;
+    color:green;
+}
+
+.zh-search{
+    width:140px;
+    height:20px;
+    position: absolute;
+    right:18px;
+    top:0px;
+    font-size:12px;
+    line-height:20px;
+    border-radius:30px;
+    border:1px solid #434343;
+}
+
+
+/** zh-table **/
+.zh-table{
+    width:820px;
+    height:560px;
+    overflow:auto;
+    margin:10px auto 0px;
+}
+
+.zh-table-fl{
+    width:300px;
+    height:560px;
+    float:left;
+}
+
+.zh-table-fr{
+    width:500px;
+    height:560px;
+    float:right;
+}
+
+.zh-table-fl-table1{
+    margin-top:10px;
+    width:300px;
+    height:330px;
+    overflow:auto;
+}
+
+.zh-table-fl-table2{
+    margin-top:10px;
+    width:300px;
+    height:160px;
+    overflow:auto;
+}
+
+.zh-begin{
+    display:inline-block;
+    width:60px;
+    height:20px;
+    color:#333;
+    margin-right:10px;
+    line-height:20px;
+    text-align: center;
+    cursor:pointer;
+    border:1px solid #434343;
+}
+
+.zh-all{
+    display:inline-block;
+    height:22px;
+    color:#FFF;
+    cursor:pointer;
+    text-align: center;
+    line-height:22px;
+    padding-left:10px;
+    padding-right:10px;
+    background-color:#868686;
+}
+
+.zh-table-fl-header{
+    height:20px;
+}
+
+.zh-table-fr-header{
+    height:20px;
+}
+
+.zh-table-fr-table{
+    margin-top:10px;
+}
+
+
+.panel-header, .panel-body{
+    border-color:#434343;
+}
+

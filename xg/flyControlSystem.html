@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>飞天控制综合监视系统</title>
+    <link rel="stylesheet" href="css/flyControlSystem.css">
+    <!-- easyui -->
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+</head>
+<body>
+<div class="wrapper">
+    <!--最上边的导航栏一条-->
+    <div class="top_header" >
+        <img src="static/images/topMenu.png" alt="头部导航" style="width: 100%;height: 100%;">
+    </div>
+    <!--最上边的导航栏一条结束-->
+    <!--导航栏下边的时间控制开始-->
+    <div>
+        <div class="time_control_left">
+            <img src="static/images/timeControlLeft.png" alt="时间控制左边的" style="width: 100%;height: 100%;">
+        </div>
+        <div class="time_control_right">
+            <!--右边时间节点上边圈号上边一行-->
+            <div class="time_control_number ">
+                <table width="100%"  style="background: #dcebfe;height: 25px;">
+                    <tr style="background: #dcebfe;">
+                        <td>圈号：    <span></span></td>
+                        <td>TO：      <span></span></td>
+                        <td>TF：      <span></span></td>
+                        <td>飞行阶段：<span></span></td>
+                    </tr>
+                </table>
+                <table width="100%" style="background: #a2c1ec;height: 30px;">
+                    <tr style="background: #a2c1ec;">
+                        <td>任务时间：    <span id="task_time">2017-05-17 14:10:00</span></td>
+                        <td>GNC时（工时）：      <span></span></td>
+                        <td>GNC时（数管）：<span></span></td>
+                        <td>数管时（工程）：<span></span></td>
+                        <td>数管时（数管）：<span>3:15:40:29:116</span></td>
+                        <td>数据源（综合）：<span></span></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+
+        <div class="left_menu">
+            <div class="left_menu_title"><span style="color: #000;margin-left: 5px;">天舟一号</span></div>
+            <ul class="easyui-tree">
+
+                <li data-options="state:'closed'">
+                    <span>信息交换与时间信息</span>
+                    <ul>
+                        <li data-options="state:'closed'">
+                            <span>信息交换与时间信息</span>
+                        </li>
+
+                    </ul>
+                </li>
+                <li data-options="state:'closed'">
+                    <span>发射段综合监视</span>
+                    <ul>
+                        <li data-options="state:'closed'">
+                            <span>发射段综合监视</span>
+                        </li>
+
+                    </ul>
+                </li>
+                <li data-options="state:'closed'">
+                    <span>轨道姿态</span>
+                    <ul>
+                        <li data-options="state:'closed'">
+                            <span>轨道姿态</span>
+                        </li>
+
+                    </ul>
+                </li>
+                <li data-options="state:'closed'">
+                    <span>遥测信息</span>
+                    <ul>
+                        <li data-options="state:'closed'">
+                            <span>遥测信息</span>
+                        </li>
+
+                    </ul>
+                </li>
+                <li >
+                    <span>上行控制</span>
+                    <ul>
+                        <li >飞行控制综合监视</li>
+                        <li>遥控指令执行比判综合监视</li>
+                        <li>遥控发令序列综合监视</li>
+                        <li>注入数据源码下传监视</li>
+
+                        <li>飞行程序下传</li>
+                        <li>遥控综合序列监视</li>
+                        <li>手动发令</li>
+                        <li>CTU内存下卸源码监视</li>
+                        <li>指令组维护综合监视页面</li>
+                        <li>遥控指令小环比对结果</li>
+
+
+                    </ul>
+                </li>
+                <li data-options="state:'closed'">
+                <span>测控计划</span>
+                <ul>
+                    <li data-options="state:'closed'">
+                        <span>发射段综合监视</span>
+                    </li>
+
+                </ul>
+            </li>
+                <li data-options="state:'closed'">
+                    <span>测控预报</span>
+                    <ul>
+                        <li data-options="state:'closed'">
+                            <span>测控预报</span>
+                        </li>
+
+                    </ul>
+                </li>
+                <li data-options="state:'closed'">
+                <span>测控网</span>
+                <ul>
+                    <li data-options="state:'closed'">
+                        <span>测控网</span>
+                    </li>
+
+                </ul>
+            </li>
+            </ul>
+
+        </div>
+        <div class="right_content">
+            <div class="right_content_bar">
+                <img src="static/images/rignt_content_bar.png" alt="右边内容部分的bar" width="100%">
+            </div>
+            <!--右边内容部分的标题-->
+            <div class="right_content_title">
+                飞行控制综合监视
+                <button id="start_btn" >开始</button>
+            </div>
+            <!--右边综合监视的表格-->
+            <div class="right_content_table" style="background: #d4e4f8;">
+                <table class="flySystem_table" style="background: #d4e4f8;font-size: 14px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>运行段</th>
+                        <th>正常模式</th>
+                        <th>入境</th>
+                        <th>工程</th>
+                        <th>00FA120</th>
+                        <th>11</th>
+                        <th colspan="2">格式III</th>
+                        <th></th>
+                        <th></th>
+                        <th>秘钥状态</th>
+                        <th>初始</th>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>手动注入帧序号</td>
+                        <td></td>
+                        <td>手动注入总帧数</td>
+                        <td></td>
+                        <td>计划注入文件名</td>
+                        <td></td>
+                        <td>计划注入帧序号</td>
+                        <td></td>
+                        <td>预备发令序列</td>
+                        <td>无预备序列</td>
+                        <td>遥控发令序列</td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>手动代发站址</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>指令名称</td>
+                        <td></td>
+                        <td ></td>
+                        <td></td>
+                        <td>指令代号</td>
+                        <td ></td>
+                        <td></td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"> </td>
+                        <td>起始帧号/指令代码</td>
+                        <td></td>
+                        <td>结束帧号/指令代码</td>
+                        <td></td>
+                        <td>目的站</td>
+                        <td  ></td>
+                        <td>发送间隔</td>
+                        <td></td>
+                        <td>循环发送次数</td>
+                        <td></td>
+
+                    </tr>
+                </table>
+
+            </div>
+            <!--实时监控部分-->
+            <div class="right_content_current_title">
+                遥控实时监控
+            </div>
+            <!---右边的实时监控的表单-->
+            <div class="right_content_current_table" style="background: #d2e2f6;">
+                <table id="" class="flySystem_current_table"width="98%" border="0" cellspacing="0" cellpadding="0">
+                    <tr style="background: #96b5ea;font-size: 12px;">
+                        <th>指令序号</th>
+                        <th>指令代号</th>
+                        <th>指令描述</th>
+                        <th>目的站址</th>
+                        <th>指令来源</th>
+                        <th>发令条件</th>
+                        <th>指令发送时间</th>
+                        <th>指令到达时间</th>
+                        <th>指令执行时间</th>
+                    </tr>
+                </table>
+                <div style="overflow-y:visible; overflow-x:hidden;height: 115px;">
+                    <table class="flySystem_current_table " id="ykssjs" width="100%" border="0" cellspacing="0" cellpadding="0"
+                    >
+
+                    </table>
+                </div>
+            </div>
+            <!--下边的各种监视-->
+            <div style="height: 300px;">
+                <!--序列监控-->
+                <div class="sequence_watch_box" style="background: #d5e5f9;">
+                    <div class="sequence_watch_title">
+                        遥控序列监视
+                    </div>
+                    <table id="" style="background: #d5e5f9;" class="flySystem_current_table"width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr style="background: #96b5ea;font-size: 12px;">
+                            <th>指令代号</th>
+                            <th>发令站</th>
+                            <th>发令时间</th>
+                            <th>注入数据文件/指令</th>
+
+                        </tr>
+                        
+                    </table>
+                    <div style="overflow-y:scroll; overflow-x:hidden;height: 250px;background: #d5e5f9;">
+                        <table class="control_effect_table " id="ykxljs" width="100%" border="0" cellspacing="0" cellpadding="0"
+                        >
+
+                        </table>
+                    </div>
+                </div>
+                <!--已发命令-->
+                <div class="publish_order_box" style=" background: #d5e5f9;">
+                    <div class="publish_order_title">
+                        已发程控指令下传(数管)
+                    </div>
+                    <table class="flySystem_current_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr style="background: #96b5ea;font-size: 12px;">
+
+                            <th>指令名称</th>
+                            <th>执行时间</th>
+                            <th>执行结果</th>
+
+                        </tr>
+
+                    </table>
+                    <div style="overflow-y:visible; overflow-x:hidden;height: 250px;">
+                        <table class="control_effect_table " width="100%" border="0" cellspacing="0" cellpadding="0"
+                        >
+                            <tr>
+                                <td>0000000</td>
+                                <td>0:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000001</td>
+                                <td>1:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000002</td>
+                                <td>2:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000003</td>
+                                <td>3:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000004</td>
+                                <td>4:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000005</td>
+                                <td>5:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000006</td>
+                                <td>6:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000007</td>
+                                <td>7:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000008</td>
+                                <td>8:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                            <tr>
+                                <td>0000009</td>
+                                <td>9:00:00</td>
+                                <td>正常</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--控制效果-->
+                <div class="control_effect_box" style=" background: #d5e5f9;">
+                    <div class="sequence_watch_title">
+                        控制效果监视
+                    </div>
+
+                    <table class="control_effect_table " width="100%" border="0" cellspacing="0" cellpadding="0"
+                           >
+                        <thead>
+
+                        <tr style="background: #96b5ea; font-size: 12px;">
+                            <th  colspan="6">正常</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div style="overflow-y:visible; overflow-x:hidden;height: 250px;">
+                        <table class="control_effect_table " style="font-size: 14px;" width="100%" border="0" cellspacing="0" cellpadding="0"
+                        >
+                            <tr>
+                                <td>A发数</td>
+                                <td>备用</td>
+                                <td>A密态</td>
+                                <td>A电压正常</td>
+                                <td>A认知正确</td>
+                                <td>A密码计数</td>
+                            </tr>
+                            <tr>
+                                <td>B发数</td>
+                                <td>备用</td>
+                                <td>B密态</td>
+                                <td>B电压正常</td>
+                                <td>B认知正确</td>
+                                <td>B密码计数</td>
+                            </tr>
+                            <tr>
+                                <td>A数管有效</td>
+                                <td>AGNC有效</td>
+                                <td>A010正常</td>
+                                <td>A载荷有效</td>
+                                <td>A数据可用</td>
+                                <td>A开门</td>
+                            </tr>
+                            <tr>
+                                <td>B数管有效</td>
+                                <td>BGNC有效</td>
+                                <td>B010正常</td>
+                                <td>B载荷有效</td>
+                                <td>B数据可用</td>
+                                <td>B开门</td>
+                            </tr>
+                            <tr>
+                                <td>A应答机有效</td>
+                                <td>A解调已通</td>
+                                <td>A空转发生变化</td>
+                                <td>中继ss有效</td>
+                                <td>中继ca有效</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>B应答机有效</td>
+                                <td>B解调已通</td>
+                                <td>B空转发生变化</td>
+                                <td>中继ss有效</td>
+                                <td>中继ca有效</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--设备状态-->
+                <div class="device_status_box" style=" background: #d5e5f9;">
+                    <div class="device_status_title">
+                        设备状态监视
+                    </div>
+                    <table class="flySystem_current_table"width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr style="background: #96b5ea; font-size: 12px;">
+                            <th>12</th>
+                            <th>A</th>
+                            <th>B</th>
+
+                        </tr>
+
+                    </table>
+                    <div style="overflow-y:visible; overflow-x:hidden;height: 250px;">
+                        <table class="control_effect_table " width="100%" border="0" cellspacing="0" cellpadding="0"
+                        >
+
+                            <tr>
+                                <td>应答机线路状态</td>
+                                <td>开</td>
+                                <td>关</td>
+                            </tr>
+                            <tr>
+                                <td>应答机锁定</td>
+                                <td>1.000</td>
+                                <td>0.000</td>
+                            </tr>
+                            <tr>
+                                <td>数据接口</td>
+                                <td>1.000</td>
+                                <td>0.000</td>
+                            </tr>
+                            <tr>
+                                <td>数据电压</td>
+                                <td>5.083</td>
+                                <td>0.000</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">前向宽波可用标志</td>
+                            </tr>
+                            <tr>
+                                <td>中继锁定</td>
+                                <td>锁定</td>
+                                <td>未锁定</td>
+                            </tr>
+                            <tr>
+                                <td>中继同步</td>
+                                <td>同步</td>
+                                <td>未同步</td>
+                            </tr>
+                            <tr>
+                                <td>ASC锁定</td>
+                                <td>锁定</td>
+                                <td>未锁定</td>
+                            </tr>
+                            <tr>
+                                <td>ASV同步</td>
+                                <td>同步</td>
+                                <td>未同步</td>
+                            </tr>
+                            <tr>
+                                <td>宽波状态</td>
+                                <td>稳定</td>
+                                <td>未稳定</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--下边最后的各种详情-->
+            <div class="right_content_detail">
+                <img src="static/images/right_content_detail.png" alt="最下边的各种详情" style="width:100%;">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/locale/zh-cn.js"></script>
+<script src="js/data.js"></script>
+<script src="js/deal.js"></script>
+<script src="js/jquery-1.4.4.min.js"></script>
+<script src="js/jquery.easyui.min.js"></script>
+</body>
+</html>

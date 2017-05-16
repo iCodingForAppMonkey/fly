@@ -1,0 +1,358 @@
+body{
+    font-family: "微软雅黑";
+    font-size:14px;
+}
+ul,ol{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+a{
+    text-decoration: none;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+    font-size:0;
+}
+
+.clearfix { *zoom:1;}
+
+.header{
+    height:30px;
+    width:1200px;
+    margin: 0 auto;
+    background-color:#505050;
+}
+
+.header > .fl{
+    color:#FFF;
+    line-height:30px;
+    text-indent: 10px;
+}
+
+.header > .fr{
+    display: block;
+    width: 30px;
+    height: 30px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#32000000, endColorstr=#32000000);
+    color: #fff;
+    cursor:pointer;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height:30px;
+}
+
+
+
+
+
+/** topNav **/
+
+.topNav{
+    height:30px;
+    width:1180px;
+    margin: 0 auto;
+    background-color:#FFF;
+    border-left:10px solid #505050;
+    border-right:10px solid #505050;
+}
+.topNav > ul{
+    list-style:none;
+}
+.topNav > ul > li{
+    float:left;
+    margin-right:36px;
+    display:inline-block;
+}
+.topNav > ul > li > a{
+    height:30px;
+    line-height:30px;
+    color:#333;
+    font-size:14px;
+    text-align: center;
+    display:inline-block;
+}
+
+.topNav  ul  li:nth-child(1){
+    margin-left:20px;
+}
+
+
+
+/** interfaceNav **/
+
+.interfaceNav{
+    height:40px;
+    width:1180px;
+    margin: 0 auto;
+    background-color:#434343;
+    border-left:10px solid #505050;
+    border-right:10px solid #505050;
+}
+
+.interfaceNav > ul > li{
+    float:left;
+    margin-right:32px;
+    display:inline-block;
+}
+
+.interfaceNav > ul > li > a{
+    height:40px;
+    line-height:40px;
+    color:#FFF;
+    font-size:16px;
+    text-align: center;
+    display:inline-block;
+}
+
+.interfaceNav  ul  li:nth-child(1){
+    padding-left:20px;
+    padding-right:20px;
+    margin-right:20px;
+    background-color:#6bbd50;
+}
+
+
+/** interfaceList **/
+
+.interfaceList{
+    height:50px;
+    width:1180px;
+    margin: 0 auto;
+    overflow:hidden;
+    background-color:#e4e4e4;
+    border-left:10px solid #505050;
+    border-right:10px solid #505050;
+}
+
+.interfaceList > .clearfix{
+    display:block;
+    height:18px;
+    margin-top:5px;
+}
+
+.interfaceListLeft{
+    float:left;
+    height:18px;
+    width:150px;
+    color:#333;
+    font-size:14px;
+    text-indent: 22px;
+    line-height:18px;
+    border-right:3px solid #666;
+}
+
+.interfaceListMid{
+    float:left;
+    width:680px;
+}
+
+.interfaceListMid > ul > li{
+    float:left;
+    margin-right:32px;
+    display:inline-block;
+}
+
+.interfaceListMid > ul > li > a{
+    height:18px;
+    line-height:18px;
+    color:#333;
+    font-size:14px;
+    text-align: center;
+    display:inline-block;
+}
+
+.interfaceListMid  ul  li:nth-child(1){
+    margin-left:10px;
+}
+
+.interfaceListRight{
+    float:left;
+    height:18px;
+    width:300px;
+    color:#333;
+    font-size:14px;
+    line-height:18px;
+}
+
+
+
+
+/** timeNav **/
+
+.timeNav{
+    height:30px;
+    width:1180px;
+    margin: 0 auto;
+    overflow:hidden;
+    background-color:#434343;
+    border-left:10px solid #505050;
+    border-right:10px solid #505050;
+}
+
+.timeNav > ul > li{
+    float:left;
+    margin-right:20px;
+    display:inline-block;
+}
+
+.timeNav > ul > li > a{
+    height:30px;
+    line-height:30px;
+    color:#FFF;
+    font-size:14px;
+    text-align: center;
+    display:inline-block;
+}
+
+.timeNav  ul  li:nth-child(1){
+    padding-left:10px;
+    padding-right:10px;
+    margin-right:10px;
+    background-color:#6bbd50;
+}
+
+
+/** watch **/
+
+.watch{
+    height:703px;
+    width:1180px;
+    margin: 0 auto;
+    padding-top:5px;
+    background-color:#FFF;
+    border-left:10px solid #505050;
+    border-right:10px solid #505050;
+    border-bottom:10px solid #505050;
+}
+
+.watchLeft{
+    float:left;
+    width:289px;
+    height:703px;
+    margin-left:3px;
+    /*border:1px solid #434343;*/
+    /*background-size:100% 100%;*/
+    /*background:url(../images/watch-left2.png) no-repeat;*/
+}
+
+.watchRight{
+    float:right;
+    width:875px;
+    height:703px;
+    margin-left:10px;
+    /*border:1px solid #434343;*/
+}
+
+.watch-close{
+    height:20px;
+    position: relative;
+}
+
+.watch-close > span{
+    position: absolute;
+    top:-5px;
+    right:-5px;
+    display:block;
+    width:20px;
+    height:20px;
+    text-align: center;
+    line-height:20px;
+    font-size:16px;
+    cursor: pointer;
+}
+
+
+/** left **/
+#th .panel{
+    width:208px !important;
+}
+
+
+
+#th .tabs-header-left{
+    width:80px !important;
+}
+
+#th .tabs-wrap{
+    margin-left:0px !important;
+}
+
+#th .tabs-header, #th .tabs-tool{
+    background-color: #FFF;
+    border-top-width:0;
+    border-left-width:0;
+    border-bottom-width:0;
+}
+
+
+#th .tabs-header-left .tabs li.tabs-selected a.tabs-inner{
+    border-right: 1px solid #ffffff !important;
+    color:#434343;
+}
+
+#th .tabs-scroller-left , #th .tabs-scroller-right{
+    display:none !important;
+}
+
+#th .tabs li a.tabs-inner{
+    /*background:#c4e09f !important;*/
+    background:none !important;
+}
+
+#th .tabs-header-left .tabs li.tabs-selected a.tabs-inner{
+    /*background:#FFF !important;*/
+}
+
+.panel-l{
+    width:188px;
+    height:433px;
+    margin:0 auto 15px;
+    border:1px solid #434343;
+}
+.panel-l-head{
+    height:30px;
+    color:#FFF;
+    text-indent: 15px;
+    line-height:30px;
+    background-color:#434343;
+}
+
+
+/** right **/
+#tt .tabs-header{
+    background-color: #FFF;
+    border-top-width:0;
+    border-left-width:0;
+    border-right-width:0;
+}
+
+.tabs-header, .tabs-scroller-left, .tabs-scroller-right, .tabs-tool, .tabs, .tabs-panels, .tabs li a.tabs-inner, .tabs li.tabs-selected a.tabs-inner, .tabs-header-bottom .tabs li.tabs-selected a.tabs-inner, .tabs-header-left .tabs li.tabs-selected a.tabs-inner, .tabs-header-right .tabs li.tabs-selected a.tabs-inner{
+    border-color: #434343;
+}
+
+#tt .tabs li.tabs-selected a.tabs-inner{
+    border-bottom: 1px solid #ffffff !important;
+    color:#434343 !important;
+}
+
+#tt .tabs li a.tabs-inner{
+    background:none !important;
+}

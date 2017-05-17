@@ -7,7 +7,7 @@ $(function () {
             startTime += 1000;
             var ts = moment(startTime).format('YYYY-MM-DD HH:mm:ss');
             $('#task_time').text(ts);
-            listView(ts,number);
+            listView(ts);
         }, 1000);
     });
     //wacthOrigin();
@@ -25,17 +25,26 @@ function listView(time,number) {
 //        ykxljs.splice(0, 1);
 //    }
     if (ykssjs[0][2] == time) {
-        number++;
+        var sts = new Date(time).getTime();
+        var idddsj=sts+5000;
+        var idzxsj=sts+15000;
         $('#ykssjs').append(
-            '<tr><td>'+number+'</td><td>' + ykssjs[0][0] +
+            '<tr><td>' + ykssjs[0][0] +
             '</td><td>' + 
             '</td><td>' + 
             '</td><td>' + ykssjs[0][5] +
             '</td><td>' + ykssjs[0][1] +
             '</td><td>' + ykssjs[0][2] + 
-            '</td><td>' + 
-            '</td><td>' + 
+            '</td><td id="'+idddsj+'">' + 
+            '</td><td id="'+idzxsj+'">' + 
             '</td></tr>');
+        if(ykssjs[0][3]==''){
+            updateTime(idddsj,5000);
+        }
+        if(ykssjs[0][4]==''){
+            updateTime(idzxsj,15000);
+        }
+        
         ykssjs.splice(0, 1);
     }
 
@@ -50,4 +59,12 @@ function wacthOrigin(){
             '</td><td>' + ykxljs[i][3] +
             '</td></tr>');
     }
+}
+//更新时间
+function updateTime(idTime,overTime){
+        setTimeout((function (ts) {
+            return function () {
+                $('#'+ts).text(moment(ts).format('YYYY-MM-DD HH:mm:ss'));
+            }
+        })(idTime), overTime);
 }

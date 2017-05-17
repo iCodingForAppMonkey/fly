@@ -15,15 +15,15 @@ $(function () {
 
 function listView(time,number) {
     //var len=ykxljs.length;
-    if (ykxljs[0][2] == time) {
-        $('#ykxljs').append(
-            '<tr><td>' + ykxljs[0][0] +
-            '</td><td>' + ykxljs[0][1] + 
-            '</td><td>' + ykxljs[0][2] + 
-            '</td><td>' + ykxljs[0][3] + 
-            '</td></tr>');
-        ykxljs.splice(0, 1);
-    }
+//    if (ykxljs[0][2] == time) {
+//        $('#ykxljs').append(
+//            '<tr><td>' + ykxljs[0][0] +
+//            '</td><td>' + ykxljs[0][1] + 
+//            '</td><td>' + ykxljs[0][2] + 
+//            '</td><td>' + ykxljs[0][3] + 
+//            '</td></tr>');
+//        ykxljs.splice(0, 1);
+//    }
     if (ykssjs[0][2] == time) {
         number++;
         $('#ykssjs').append(

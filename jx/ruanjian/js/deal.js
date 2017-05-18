@@ -1,4 +1,5 @@
 var startTime = new Date('2017-05-17 14:10:00').getTime();
+var redDiv='<div style="background-color:red">&nbsp;</div>';
 $(function () {
     $('.zh-begin').click(function () {
         parent.window.$('#task_time').text('2017-05-17 14:10:00');
@@ -15,6 +16,14 @@ $(function () {
 function listView(time) {
     if (ykssjs[0][2] == time) {
         var idx = $('#ykssjs').datagrid('getRows').length;
+        var ddsjDiv="";
+        if(ykssjs[0][3]=='red'){
+            ddsjDiv=redDiv;
+        }
+        var zxsjDiv="";
+        if(ykssjs[0][4]=='red'){
+            zxsjDiv=redDiv;
+        }
         $('#ykssjs').datagrid('insertRow', {
             index: idx, // index start with 0
             row: {
@@ -23,22 +32,16 @@ function listView(time) {
                 proxyno: ykssjs[0][5],
                 fltj: ykssjs[0][1],
                 fssj: ykssjs[0][2],
-                ddsj: '',
-                zxsj: ''
+                ddsj: ddsjDiv,
+                zxsj: zxsjDiv
             }
         });
         //到达时间，执行时间处理
         jstimes(idx,ykssjs[0][3],ykssjs[0][4]);
         
-        if(ykssjs[0][6]!='' && ykssjs[0][6]!='正常'){
-            
-        }else{
-            
-        }
+        parent.window.viewJkxgjs(ykssjs[0][6]);
         
-        if(ykssjs[0][7]!='' && ykssjs[0][7]!='正常'){
-            
-        }
+        parent.window.viewSbztjs(ykssjs[0][7]);
         
         ykssjs.splice(0, 1);
     }
@@ -70,3 +73,5 @@ function jstimes(idx,ddsj,zxsj) {
         })(idx), 15000);
     }
 }
+
+

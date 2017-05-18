@@ -116,7 +116,7 @@
                 <li id="selectTree" >
                     <span>上行控制</span>
                     <ul >
-                        <li  >飞行控制综合监视</li>
+                        <li>飞行控制综合监视</li>
                         <li>遥控指令执行比判综合监视</li>
                         <li>遥控发令序列综合监视</li>
                         <li>注入数据源码下传监视</li>
@@ -248,7 +248,7 @@
             </div>
             <!---右边的实时监控的表单-->
             <div class="right_content_current_table" style="background: #d2e2f6;">
-                <table id="" class="flySystem_current_table"width="98%" border="0" cellspacing="0" cellpadding="0">
+                <table id="22" class="flySystem_current_table"width="98%" border="0" cellspacing="0" cellpadding="0">
                     <tr style="background: #96b5ea;font-size: 12px;width: 100%;">
                         <th><div style="width: 94px;">指令代号</div> </th>
                         <th><div style="width: 93px;">指令描述</div></th>
@@ -822,13 +822,8 @@
                         </tr>
                         </tbody>
                         </table>-->
-                    <table id="yk_control_table" class="easyui-datagrid control_effect_table  easyui-datagrid" width="100%" border="0" cellspacing="0" cellpadding="0"
-                           style="width: 100%;height:265px;background: #d5e5f9;" data-options="singleSelect:true,collapsible:true,autoRowHeight:true,">
-                        <thead>
-                        <tr style="background: #96b5ea;font-size: 12px;">
-
-                        </tr>
-                        </thead>
+                    <table id="jkxgjs">
+                        
                         <tbody>
 
                         <tr>
@@ -889,14 +884,7 @@
                         设备状态监视
                     </div>
 
-                    <table class="easyui-datagrid" id="example" title="" style="width: 100%;height:265px;background: #d5e5f9;" data-options="singleSelect:true,collapsible:true,autoRowHeight:true,">
-                        <thead>
-                        <tr>
-                            <th data-options="field:'itemid',width:'150px',align:'left',nowrap:false"></th>
-                            <th data-options="field:'voice',width:50">发令站</th>
-                            <th data-options="field:'time',width:50,align:'left'">发令时间</th>
-                        </tr>
-                        </thead>
+                    <table id="sbztjs">
                         <tbody>
                         <tr>
                             <td>应答机线路状态</td>
@@ -919,7 +907,7 @@
                             <td>0.000</td>
                         </tr>
                         <tr>
-                            <td colspan="3">前向宽波可用标志</td>
+                            <td colspan="3" style="text-align:center;">前向宽波可用标志</td>
                         </tr>
                         <tr>
                             <td>中继锁定</td>
@@ -966,20 +954,7 @@
 <script src="js/jquery-1.4.4.min.js"></script>
 <script src="js/jquery.easyui.min.js"></script>
 <script>
-    $('#example').datagrid({
-        columns:[[
-            {field:'code',title:'',width:100,fitColumns :true,nowarp : false,
-            },
-            {field:'name',title:'A',width:45,
-            },
-            {field:'price',title:'B',width:50,align:'left',
-            },
-        ]],
-        rowStyler:function(index,row){
-            return 'background-color:#d4e4f8;';
-        }
-
-    });
+    
     $('#yk_quence_table').datagrid({
         columns:[[
             {field:'code',title:'指令代号',width:50,fitColumns :true,nowarp : false,
@@ -1011,26 +986,39 @@
         }
     });
     //控制效果展示
-    $('#yk_control_table').datagrid({
-        columns:[[
-            {field:'code', title:'',fitColumns :true,nowarp : false,
-            },
-            {field:'code1',title:'',fitColumns :true,nowarp : false,
-            },
-            {field:'code2',title:'正常',fitColumns :true,nowarp : false,
-            },
-            {field:'code3', title:'',fitColumns :true,nowarp : false,
-            },
-            {field:'code4',title:'',fitColumns :true,nowarp : false,
-            },
-            {field:'code5',title:'',fitColumns :true,nowarp : false,
-            },
-
-        ]],
-        rowStyler:function(index,row){
-            return 'background-color:#d4e4f8;';
-        }
-    });
+//    $('#yk_control_table').datagrid({
+//        columns:[[
+//            {field:'code', title:'',fitColumns :true,nowarp : false,
+//            },
+//            {field:'code1',title:'',fitColumns :true,nowarp : false,
+//            },
+//            {field:'code2',title:'正常',fitColumns :true,nowarp : false,
+//            },
+//            {field:'code3', title:'',fitColumns :true,nowarp : false,
+//            },
+//            {field:'code4',title:'',fitColumns :true,nowarp : false,
+//            },
+//            {field:'code5',title:'',fitColumns :true,nowarp : false,
+//            },
+//
+//        ]],
+//        rowStyler:function(index,row){
+//            return 'background-color:#d4e4f8;';
+//        }
+//    });
+//    $('#example').datagrid({
+//        columns:[[
+//            {field:'code',title:'',width:100,fitColumns :true,nowarp : false,
+//            },
+//            {field:'name',title:'A',width:45,
+//            },
+//            {field:'price',title:'B',width:50,align:'left',
+//            },
+//        ]],
+//        rowStyler:function(index,row){
+//            return 'background-color:#d4e4f8;';
+//        }
+//    });
     //设置左边默认选中
     var addr_tree = $("#mytree").tree({
         onLoadSuccess:function(node,data){

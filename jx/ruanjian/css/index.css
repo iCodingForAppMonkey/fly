@@ -417,9 +417,6 @@ a{
 }
 
 
-.tbStyle1 tr:nth-child(odd){
-    background:#c9c9c9 !important;
-}
 
 .tabs-title{
     font-size:14px;

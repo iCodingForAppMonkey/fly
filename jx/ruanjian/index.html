@@ -98,7 +98,7 @@
                         <div class="panel-l-head">控制效果监视</div>
                         <div class="panel-l-body">
 
-                        <table border="1"  class="tbStyle1">
+                        <table border="1"  class="tbStyle1" id="jkxgjs">
                             <tr>
                                 <td>A发数</td>
                                 <td>备用</td>
@@ -156,7 +156,7 @@
                     <div class="panel-l" style="height:350px">
                         <div class="panel-l-head">设备状态监视</div>
                         <div class="panel-l-body">
-                            <table border="1" class="tbStyle1" style="width: 100%;">
+                            <table border="1" class="tbStyle1" style="width: 100%;" id="sbztjs">
                                 <tr>
                                     <td></td>
                                     <td>A</td>
@@ -183,7 +183,7 @@
                                     <td>0.000</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3">前向宽波可用标志		</td>
+                                    <td colspan="3" style="text-align:center;">前向宽波可用标志</td>
                                 </tr>
                                 <tr>
                                     <td>中继锁定</td>
@@ -247,6 +247,7 @@
 
     <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script src="../../xg/js/data.js"></script>
     <script>
 
 
@@ -271,6 +272,52 @@
                 });
             }
         }
+        
+        function viewJkxgjs(i){
+            if(i=='' || i=='正常'){
+                i=0;   
+            }
+            var data=jkxgjs[i],trs='',len=jkxgjs[i].length;
+            for(var j=0;j<len;j++){
+                trs+='<tr>';
+                var clen=data[j].length,cdata=data[j];
+                for(var c=0;c<clen;c++){
+                    var tds='<td>'+cdata[c]+'</td>';
+                    if(cdata[c].indexOf(',')>-1){
+                        var sps=cdata[c].split(',');
+                        tds='<td style="background-color:'+sps[1]+'">'+sps[0]+'</td>';
+                    }
+                    trs+=tds;
+                }
+                trs+='</tr>';
+            }
+            $('#jkxgjs').html(trs);
+        }
+        function viewSbztjs(i){
+            if(i=='' || i=='正常'){
+                i=0;   
+            }
+            var data=sbztjs[i],trs='<tr><td></td><td>A</td><td>B</td></tr>',len=sbztjs[i].length;
+            for(var j=0;j<len;j++){
+                var clen=data[j].length,cdata=data[j];
+                for(var c=0;c<clen;c++){
+                    trs+='<tr>';
+                    var hlen=cdata[c].length;hdata=cdata[c];
+                    for(var h=0;h<hlen;h++){
+                        var tds='<td>'+hdata[h]+'</td>';
+                        if(hdata[h].indexOf(',')>-1){
+                            var sps=hdata[h].split(',');
+                            tds='<td style="background-color:'+sps[1]+'">'+sps[0]+'</td>';
+                        }
+                        trs+=tds;
+                    }
+                    trs+='</tr>';
+                }
+                if(j==0) trs+='<tr><td colspan="3" style="text-align:center;">前向宽波可用标志</td></tr>';
+            }
+            
+            $('#sbztjs').html(trs);
+}
     </script>
     
 </body>

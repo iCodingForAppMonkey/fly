@@ -32,7 +32,7 @@ a{
 }
 
 .yk-table{
-    width:820px;
+    width:920px;
     height:600px;
     margin:0 auto;
     overflow:auto;
@@ -54,3 +54,11 @@ a{
 .panel-header, .panel-body{
     border-color:#434343;
 }
+
+.datagrid tr:nth-child(odd){
+    background:#EEE !important;
+}
+.datagrid tr.datagrid-header-row{
+    background:#c8c8c8 !important;
+}
+

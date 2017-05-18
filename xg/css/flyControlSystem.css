@@ -1,6 +1,7 @@
 div,span,li,ul,body,img,table,tr{
     padding:0;
     margin:0;
+    font-family: 微软雅黑；
 }
 .wrapper{
     width:1200px;
@@ -17,15 +18,31 @@ div,span,li,ul,body,img,table,tr{
 }
 .time_control_right{
     float: right;
-    width:85%;
+    width:100%;
     height: 54px;
+
+}
+.time_control_number{
+    height:56px;
+    background: #9ebef5;
+}
+.time_control_number_top>ul>li{
+    float:left;
+    margin-right:20px;
+    display:inline-block;
+    float: left;
+    margin-right: 20px;
+    font-size: 14px;
+    display: inline-block;
+    line-height: 26px;
+    font-weight:600;
 }
 /*左边的菜单栏*/
 .left_menu {
     width: 24%;
     float: left;
     background: #c4d7f9;
-    height: 910px;
+    height: 830px;
 }
 .left_menu_title{
     height: 30px;
@@ -41,7 +58,7 @@ div,span,li,ul,body,img,table,tr{
 .right_content{
     width:76%;
     float: right;
-    height: 910px;
+    height: 830px;
 }
 #start_btn{
     border: none;
@@ -66,8 +83,8 @@ div,span,li,ul,body,img,table,tr{
 }
 /*标题下的表格部分设置*/
 .right_content_table{
-    width:100%;
-    border: 2px solid #000000;
+    width: 908px;
+    border: 2px inset #000;
 
 }
 
@@ -106,14 +123,22 @@ div,span,li,ul,body,img,table,tr{
 .flySystem_current_table td,.flySystem_current_table th{
     border-left:1px solid #000;
     border-top:1px solid #000;
-    height: 20px;
     text-align: center;
     width:12%;
+    margin: 0;
+    padding: 0 4px;
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+    height: 18px;
+    line-height: 18px;
+    font-size: 12px;
 }
 /*遥控序列监视*/
 .sequence_watch_box,.publish_order_box{
     width:25%;
     border:2px solid #000000;
+    border-right: none;
     height:inherit;
     float: left;
 }
@@ -137,6 +162,7 @@ div,span,li,ul,body,img,table,tr{
 .control_effect_box{
     width:30%;
     border:2px solid #000000;
+
     float: left;
     height:inherit;
 }
@@ -144,6 +170,7 @@ div,span,li,ul,body,img,table,tr{
 .device_status_box{
     width:18%;
     border:2px solid #000000;
+    border-left:none;
     float: left;
     height:inherit;
 }

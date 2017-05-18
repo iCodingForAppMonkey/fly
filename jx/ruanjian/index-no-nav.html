@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/normalize-7.0.css">
+    <!-- easyui -->
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
+    <link href="css/fonts/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+<body>
+<!--<div class="header clearfix">-->
+    <!--<div class="fl">状态栏展开</div>-->
+    <!--<div class="fr"><i class="fa fa-fw fa-close"></i></div>-->
+<!--</div>-->
+
+
+<!--<div class="topNav clearfix">-->
+    <!--<ul>-->
+        <!--<li><a href="javascript:void(0);">查看界面</a></li>-->
+        <!--<li><a href="javascript:void(0);">系统管理</a></li>-->
+        <!--<li><a href="javascript:void(0);">任务组管理</a></li>-->
+        <!--<li><a href="javascript:void(0);">工具</a></li>-->
+        <!--<li><a href="javascript:void(0);">视图</a></li>-->
+        <!--<li><a href="javascript:void(0);">收藏</a></li>-->
+        <!--<li><a href="javascript:void(0);">设置</a></li>-->
+        <!--<li><a href="javascript:void(0);">窗口</a></li>-->
+        <!--<li><a href="javascript:void(0);">帮助</a></li>-->
+        <!--<li><a href="javascript:void(0);">常用界面</a></li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+<!--<div class="interfaceNav clearfix">-->
+    <!--<ul>-->
+        <!--<li><a href="javascript:void(0);">常用界面列表</a></li>-->
+        <!--<li><a href="javascript:void(0);" onclick="addTab('遥控指令执行比判综合监视','yk-watch.html')">遥控指令执行比判综合监视</a></li>-->
+        <!--<li><a href="javascript:void(0);" onclick="addTab('手动发令','yk-watch.html')" >手动发令</a></li>-->
+        <!--<li><a href="javascript:void(0);" onclick="addTab('遥控综合序列监视','yk-watch.html')" >遥控综合序列监视</a></li>-->
+        <!--<li><a href="javascript:void(0);" onclick="addTab('注入数据','yk-watch.html')" >注入数据</a></li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+<div class="interfaceList">
+    <div class="clearfix">
+        <div class="interfaceListLeft">任务代号</div>
+        <div class="interfaceListMid">
+            <ul>
+                <li><a href="javascript:void(0);">圈号：</a></li>
+                <li><a href="javascript:void(0);">T0：</a></li>
+                <li><a href="javascript:void(0);">TF：</a></li>
+                <li><a href="javascript:void(0);">飞行阶段：</a></li>
+            </ul>
+        </div>
+        <div class="interfaceListRight">数据源（综合）</div>
+    </div>
+    <div class="clearfix">
+        <div class="interfaceListLeft">目标代号</div>
+        <div class="interfaceListMid">
+            <ul>
+                <li><a href="javascript:void(0);">数管</a></li>
+                <li><a href="javascript:void(0);">运行段</a></li>
+                <li><a href="javascript:void(0);">正常模式</a></li>
+                <li><a href="javascript:void(0);">入境</a></li>
+                <li><a href="javascript:void(0);">格式III</a></li>
+                <li><a href="javascript:void(0);">工程：00FAF120</a></li>
+                <li><a href="javascript:void(0);">11</a></li>
+            </ul>
+        </div>
+        <div class="interfaceListRight">密钥状态 ：初始</div>
+    </div>
+</div>
+
+
+<div class="timeNav clearfix">
+    <ul>
+        <li><a href="javascript:void(0);">时间</a></li>
+        <li><a href="javascript:void(0);">任务：</a><span style="color:#fff;" id="task_time"></span></li>
+        <li><a href="javascript:void(0);">飞行时间：000:00:00.00</a></li>
+        <li><a href="javascript:void(0);">GNC（工程）：0:00:00:000</a></li>
+        <li><a href="javascript:void(0);">GNC（数管）：0:00:00:000</a></li>
+        <li><a href="javascript:void(0);">数管（工程）：0:00:00:000</a></li>
+        <li><a href="javascript:void(0);">数管（数管）：3:15:40:29:116</a></li>
+    </ul>
+</div>
+
+
+<div class="watch clearfix">
+    <div class="watchLeft">
+
+        <div id="th" class="easyui-tabs" style="width:390px;height:703px">
+            <div title="状态监视" style="padding:10px">
+
+                <!-- panel -->
+                <div class="panel-l">
+                    <div class="panel-l-head">控制效果监视</div>
+                    <div class="panel-l-body">
+
+                        <table border="1"  class="tbStyle1">
+                            <tr>
+                                <td>A发数</td>
+                                <td>备用</td>
+                                <td>A密态</td>
+                                <td>A电压正常</td>
+                                <td>A认知正确</td>
+                                <td>A密钥计数</td>
+                            </tr>
+                            <tr>
+                                <td>B发数</td>
+                                <td>备用</td>
+                                <td>B密态</td>
+                                <td>B电压正常</td>
+                                <td>B认知正确</td>
+                                <td>B密钥计数</td>
+                            </tr>
+                            <tr>
+                                <td>A数管有效</td>
+                                <td>AGNC有效</td>
+                                <td>A010正常</td>
+                                <td>A载荷有效</td>
+                                <td>A数据可用</td>
+                                <td>A开门</td>
+                            </tr>
+                            <tr>
+                                <td>B数管有效</td>
+                                <td>BGNC有效</td>
+                                <td>B010正常</td>
+                                <td>B载荷有效</td>
+                                <td>B数据可用</td>
+                                <td>B开门</td>
+                            </tr>
+
+                            <tr>
+                                <td>A应答机有效</td>
+                                <td>A解调已通</td>
+                                <td>A空转发生变化</td>
+                                <td>中继ss有效</td>
+                                <td>中继ca有效</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>B应答机有效</td>
+                                <td>B解调已通</td>
+                                <td>B空转发生变化</td>
+                                <td>中继ss有效</td>
+                                <td>中继ca有效</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- panel -->
+                <div class="panel-l" style="height:350px">
+                    <div class="panel-l-head">设备状态监视</div>
+                    <div class="panel-l-body">
+                        <table border="1" class="tbStyle1" style="width: 100%;">
+                            <tr>
+                                <td></td>
+                                <td>A</td>
+                                <td>B</td>
+                            </tr>
+                            <tr>
+                                <td>应答机线路状态</td>
+                                <td>开</td>
+                                <td>关</td>
+                            </tr>
+                            <tr>
+                                <td>应答机锁定</td>
+                                <td>1.000</td>
+                                <td>0.000</td>
+                            </tr>
+                            <tr>
+                                <td>数据接口</td>
+                                <td>1.000</td>
+                                <td>0.000</td>
+                            </tr>
+                            <tr>
+                                <td>数据电压</td>
+                                <td>5.083</td>
+                                <td>0.000</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">前向宽波可用标志		</td>
+                            </tr>
+                            <tr>
+                                <td>中继锁定</td>
+                                <td>锁定</td>
+                                <td>未锁定</td>
+                            </tr>
+                            <tr>
+                                <td>中继同步</td>
+                                <td>同步</td>
+                                <td>未同步</td>
+                            </tr>
+                            <tr>
+                                <td>ASC锁定</td>
+                                <td>锁定</td>
+                                <td>未锁定</td>
+                            </tr>
+                            <tr>
+                                <td>ASV同步</td>
+                                <td>同步</td>
+                                <td>未同步</td>
+                            </tr>
+                            <tr>
+                                <td>宽波状态</td>
+                                <td>稳定</td>
+                                <td>未稳定</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div title="已发程控" style="padding:10px">
+                已发程控
+            </div>
+            <div title="小环比对" data-options="" style="padding:10px">
+                小环比对
+            </div>
+            <div title="GNC" data-options="" style="padding:10px">
+                GNC
+            </div>
+            <div title="循环发令" data-options="" style="padding:10px">
+                循环发令
+            </div>
+        </div>
+
+    </div>
+
+    <div class="watchRight">
+
+        <!-- tab -->
+        <div id="tt" class="easyui-tabs" style="width:100%;height:703px;">
+            <div title="综合监视">
+                <iframe scrolling="auto" frameborder="0"  src="zh-watch.html" style="width:100%;height:100%;"></iframe>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script>
+
+
+    $(function(){
+        $('#th').tabs({
+            tabPosition:"left"
+        })
+    })
+
+
+
+    //动态添加
+    function addTab(title, url){
+        if ($('#tt').tabs('exists', title)){
+            $('#tt').tabs('select', title);
+        } else {
+            var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+            $('#tt').tabs('add',{
+                title:title,
+                content:content,
+                closable:true
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

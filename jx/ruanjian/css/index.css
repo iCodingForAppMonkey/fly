@@ -35,7 +35,7 @@ a{
 
 .header{
     height:30px;
-    width:1200px;
+    width:1400px;
     margin: 0 auto;
     background-color:#505050;
 }
@@ -67,7 +67,7 @@ a{
 
 .topNav{
     height:30px;
-    width:1180px;
+    width:1380px;
     margin: 0 auto;
     background-color:#FFF;
     border-left:10px solid #505050;
@@ -100,7 +100,7 @@ a{
 
 .interfaceNav{
     height:40px;
-    width:1180px;
+    width:1380px;
     margin: 0 auto;
     background-color:#434343;
     border-left:10px solid #505050;
@@ -134,7 +134,7 @@ a{
 
 .interfaceList{
     height:50px;
-    width:1180px;
+    width:1380px;
     margin: 0 auto;
     overflow:hidden;
     background-color:#e4e4e4;
@@ -199,7 +199,7 @@ a{
 
 .timeNav{
     height:30px;
-    width:1180px;
+    width:1380px;
     margin: 0 auto;
     overflow:hidden;
     background-color:#434343;
@@ -223,9 +223,9 @@ a{
 }
 
 .timeNav  ul  li:nth-child(1){
-    padding-left:10px;
-    padding-right:10px;
-    margin-right:10px;
+    padding-left:20px;
+    padding-right:20px;
+    margin-right:20px;
     background-color:#6bbd50;
 }
 
@@ -234,7 +234,7 @@ a{
 
 .watch{
     height:703px;
-    width:1180px;
+    width:1380px;
     margin: 0 auto;
     padding-top:5px;
     background-color:#FFF;
@@ -245,7 +245,7 @@ a{
 
 .watchLeft{
     float:left;
-    width:289px;
+    width:389px;
     height:703px;
     margin-left:3px;
     /*border:1px solid #434343;*/
@@ -255,7 +255,7 @@ a{
 
 .watchRight{
     float:right;
-    width:875px;
+    width:975px;
     height:703px;
     margin-left:10px;
     /*border:1px solid #434343;*/
@@ -282,13 +282,13 @@ a{
 
 /** left **/
 #th .panel{
-    width:208px !important;
+    width:358px !important;
 }
 
 
 
 #th .tabs-header-left{
-    width:80px !important;
+    width:30px !important;
 }
 
 #th .tabs-wrap{
@@ -322,10 +322,9 @@ a{
 }
 
 .panel-l{
-    width:188px;
-    height:433px;
+    width:358px;
+    height:300px;
     margin:0 auto 15px;
-    border:1px solid #434343;
 }
 .panel-l-head{
     height:30px;
@@ -356,3 +355,73 @@ a{
 #tt .tabs li a.tabs-inner{
     background:none !important;
 }
+
+
+
+/** 旋转 **/
+#th .tabs-title{
+    display:block;
+    width:60px;
+    height:30px;
+    text-align: center;
+    line-height: 30px;
+    transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg); 	/* IE 9 */
+    -moz-transform:rotate(-90deg); 	/* Firefox */
+    -webkit-transform:rotate(-90deg) translate(-15px, -28px); /* Safari 和 Chrome */
+    -o-transform:rotate(-90deg); 	/* Opera */
+}
+
+#th .tabs li a.tabs-inner{
+    height:60px !important;
+    line-height: 40px !important;
+}
+
+#th .tabs-header-left .tabs li{
+    background-color:#c6df9e;
+}
+
+#th .tabs-header-left .tabs li.tabs-selected{
+    background-color:#FFF;
+}
+
+#th .tabs-panels-right .panel > div{
+    width:358px !important;
+    height: 703px !important;
+}
+
+
+.tbStyle1{
+    font-family:Verdana,Arial,sans-serif;
+    font-size:11px;
+    color:#333;
+    border-width:1px;
+    border-color:#666;
+    border-collapse: collapse;
+}
+
+.tbStyle1 th{
+    border-width:1px;
+    padding:8px;
+    border-style:solid;
+    border-color:#666;
+    background-color:#DEDEDE;
+}
+
+.tbStyle1 td{
+    border-width:1px;
+    padding:8px;
+    border-style:solid;
+    border-color:#666;
+    /*background-color:#FFF;*/
+}
+
+
+.tbStyle1 tr:nth-child(odd){
+    background:#c9c9c9 !important;
+}
+
+.tabs-title{
+    font-size:14px;
+}
+

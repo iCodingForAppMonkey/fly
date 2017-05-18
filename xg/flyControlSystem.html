@@ -5,34 +5,44 @@
     <title>飞天控制综合监视系统</title>
     <link rel="stylesheet" href="css/flyControlSystem.css">
     <!-- easyui -->
-    <link rel="stylesheet" type="text/css" href="../jx/ruanjian/js/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../jx/ruanjian/js/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="./css/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./css/easyui/themes/icon.css">
+    <style>
+        .datagrid-header-row{
+            background-color: #96b5ea;
+        }
+        .datagrid-body{
+            background: #d4e4f8;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper">
-    <!--最上边的导航栏一条-->
+
     <div class="top_header" >
         <img src="static/images/topMenu.png" alt="头部导航" style="width: 100%;height: 100%;">
     </div>
     <!--最上边的导航栏一条结束-->
     <!--导航栏下边的时间控制开始-->
     <div>
-        <div class="time_control_left">
+<!--        <div class="time_control_left">
             <img src="static/images/timeControlLeft.png" alt="时间控制左边的" style="width: 100%;height: 100%;">
-        </div>
+        </div>-->
         <div class="time_control_right">
             <!--右边时间节点上边圈号上边一行-->
             <div class="time_control_number ">
-                <table width="100%"  style="background: #dcebfe;height: 25px;">
-                    <tr style="background: #dcebfe;">
-                        <td>圈号：    <span></span></td>
-                        <td>TO：      <span></span></td>
-                        <td>TF：      <span></span></td>
-                        <td>飞行阶段：<span></span></td>
-                    </tr>
-                </table>
-                <table width="100%" style="background: #a2c1ec;height: 30px;">
-                    <tr style="background: #a2c1ec;">
+
+                <div class="time_control_number_top">
+                    <ul style="float: left;">
+                        <li style="margin-left: 20px;">任务代号：KJSYS</li>
+                        <li style="margin-left: 100px;">圈号：</li>
+                        <li >TO：  </li>
+                        <li style="margin-left: 112px;">TF：</li>
+                        <li style="margin-left: 100px;">飞行阶段：</li>
+                    </ul>
+                </div>
+               <!-- <table width="100%" style="height: 30px;">
+                    <tr >
                         <td>任务时间：    <span id="task_time">2017-05-17 14:10:00</span></td>
                         <td>GNC时（工时）：      <span></span></td>
                         <td>GNC时（数管）：<span></span></td>
@@ -40,7 +50,22 @@
                         <td>数管时（数管）：<span>3:15:40:29:116</span></td>
                         <td>数据源（综合）：<span></span></td>
                     </tr>
-                </table>
+                </table>-->
+                <div class="time_control_number_top">
+                    <ul style="float: left;">
+                        <li style="margin-left: 20px;">目标代号：
+                            <select style="background: #6a7ea9;" name="" id="">
+                                <option value="">TZ01(GNCC)</option>
+                            </select>
+                        </li>
+                        <li>任务时间:<span id="task_time">2017-05-17 14:10:00</span></li>
+                        <li style="margin-left: 30px;">GNC时（工时）：</li>
+                        <li>GNC时（数管）：</li>
+                        <li>数管时（工程）：</li>
+                        <li>数管时（数管）：<span>3:15:40:29:116</span></li>
+                        <li>数据源（综合）：</li>
+                    </ul>
+                </div>
             </div>
 
         </div>
@@ -50,7 +75,7 @@
 
         <div class="left_menu">
             <div class="left_menu_title"><span style="color: #000;margin-left: 5px;">天舟一号</span></div>
-            <ul class="easyui-tree">
+            <ul class="easyui-tree" id="mytree" style="height: 635px;">
 
                 <li data-options="state:'closed'">
                     <span>信息交换与时间信息</span>
@@ -88,10 +113,10 @@
 
                     </ul>
                 </li>
-                <li >
+                <li id="selectTree" >
                     <span>上行控制</span>
-                    <ul>
-                        <li >飞行控制综合监视</li>
+                    <ul >
+                        <li  >飞行控制综合监视</li>
                         <li>遥控指令执行比判综合监视</li>
                         <li>遥控发令序列综合监视</li>
                         <li>注入数据源码下传监视</li>
@@ -134,7 +159,11 @@
                 </ul>
             </li>
             </ul>
-
+            <div class="left_menu_title"><span style="color: #000;margin-left: 5px;">两目标关键飞控过程</span></div>
+            <div class="left_menu_title"><span style="color: #000;margin-left: 5px;">天宫二号</span></div>
+            <div class="left_menu_title"><span style="color: #000;margin-left: 5px;">公共显示</span></div>
+            <div class="left_menu_title"><span style="color: #000;margin-left: 5px;">立方星</span></div>
+            <div class="left_menu_title"><span style="color: #000;margin-left: 5px;">天二伴星</span></div>
         </div>
         <div class="right_content">
             <div class="right_content_bar">
@@ -146,69 +175,72 @@
                 <button id="start_btn" >开始</button>
             </div>
             <!--右边综合监视的表格-->
-            <div class="right_content_table" style="background: #d4e4f8;">
-                <table class="flySystem_table" style="background: #d4e4f8;font-size: 14px;" width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <th>运行段</th>
-                        <th>正常模式</th>
-                        <th>入境</th>
-                        <th>工程</th>
-                        <th>00FA120</th>
-                        <th>11</th>
-                        <th colspan="2">格式III</th>
-                        <th></th>
-                        <th></th>
-                        <th>秘钥状态</th>
-                        <th>初始</th>
+            <div style="width: 100%;background: #d4e4f8;">
 
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>手动注入帧序号</td>
-                        <td></td>
-                        <td>手动注入总帧数</td>
-                        <td></td>
-                        <td>计划注入文件名</td>
-                        <td></td>
-                        <td>计划注入帧序号</td>
-                        <td></td>
-                        <td>预备发令序列</td>
-                        <td>无预备序列</td>
-                        <td>遥控发令序列</td>
+                <div class="right_content_table" >
+                    <table class="flySystem_table" style="background: #d4e4f8;font-size: 14px;" width="99%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>运行段</th>
+                            <th>正常模式</th>
+                            <th>入境</th>
+                            <th>工程</th>
+                            <th>00FA120</th>
+                            <th>11</th>
+                            <th colspan="2">格式III</th>
+                            <th></th>
+                            <th></th>
+                            <th>秘钥状态</th>
+                            <th>初始</th>
 
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>手动代发站址</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>指令名称</td>
-                        <td></td>
-                        <td ></td>
-                        <td></td>
-                        <td>指令代号</td>
-                        <td ></td>
-                        <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>手动注入帧序号</td>
+                            <td></td>
+                            <td>手动注入总帧数</td>
+                            <td></td>
+                            <td>计划注入文件名</td>
+                            <td></td>
+                            <td>计划注入帧序号</td>
+                            <td></td>
+                            <td>预备发令序列</td>
+                            <td>无预备序列</td>
+                            <td>遥控发令序列</td>
 
-                    </tr>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>手动代发站址</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>指令名称</td>
+                            <td></td>
+                            <td ></td>
+                            <td></td>
+                            <td>指令代号</td>
+                            <td ></td>
+                            <td></td>
 
-                    <tr>
-                        <td colspan="2"> </td>
-                        <td>起始帧号/指令代码</td>
-                        <td></td>
-                        <td>结束帧号/指令代码</td>
-                        <td></td>
-                        <td>目的站</td>
-                        <td  ></td>
-                        <td>发送间隔</td>
-                        <td></td>
-                        <td>循环发送次数</td>
-                        <td></td>
+                        </tr>
 
-                    </tr>
-                </table>
+                        <tr>
+                            <td colspan="2"> </td>
+                            <td>起始帧号/指令代码</td>
+                            <td></td>
+                            <td>结束帧号/指令代码</td>
+                            <td></td>
+                            <td>目的站</td>
+                            <td  ></td>
+                            <td>发送间隔</td>
+                            <td></td>
+                            <td>循环发送次数</td>
+                            <td></td>
 
+                        </tr>
+                    </table>
+
+                </div>
             </div>
             <!--实时监控部分-->
             <div class="right_content_current_title">
@@ -217,22 +249,40 @@
             <!---右边的实时监控的表单-->
             <div class="right_content_current_table" style="background: #d2e2f6;">
                 <table id="" class="flySystem_current_table"width="98%" border="0" cellspacing="0" cellpadding="0">
-                    <tr style="background: #96b5ea;font-size: 12px;">
-                        <th>指令代号</th>
-                        <th>指令描述</th>
-                        <th>目的站址</th>
-                        <th>指令来源</th>
-                        <th>发令条件</th>
-                        <th>指令发送时间</th>
-                        <th>指令到达时间</th>
-                        <th>指令执行时间</th>
+                    <tr style="background: #96b5ea;font-size: 12px;width: 100%;">
+                        <th><div style="width: 92px;">指令序号</div></th>
+                        <th><div style="width: 94px;">指令代号</div> </th>
+                        <th><div style="width: 93px;">指令描述</div></th>
+                        <th><div style="width: 93px;">目的站址</div></th>
+                        <th><div style="width: 94px;">指令来源</div></th>
+                        <th><div style="width: 95px;">发令条件</div></th>
+                        <th ><div style="width: 114px;">指令发送时间</div></th>
+                        <th><div style="width: 94px;">指令到达时间</div></th>
+                        <th><div style="width: 45px;">执行时间</div></th>
                     </tr>
                 </table>
-                <div style="overflow-y:visible; overflow-x:hidden;height: 115px;">
-                    <table class="flySystem_current_table " id="ykssjs" width="100%" border="0" cellspacing="0" cellpadding="0"
+                <div style="overflow-y:visible; overflow-x:hidden;height: 60px;">
+                    <table class="flySystem_current_table  "  width="98%" border="0" cellspacing="0" cellpadding="0"
                     >
+                        <!--<thead>
 
+                        <tr style="background: #96b5ea;font-size: 12px;">
+                            <th data-options="field:'itemid',width:150">指令序号</th>
+                            <th data-options="field:'productid',width:80">指令代号</th>
+                            <th data-options="field:'productid',width:80">指令描述</th>
+                            <th data-options="field:'productid',width:80">目的站址</th>
+                            <th data-options="field:'productid',width:80">指令来源</th>
+                            <th data-options="field:'productid',width:80">发令条件</th>
+                            <th data-options="field:'productid',width:80">指令发送时间</th>
+                            <th data-options="field:'productid',width:80">指令到达时间</th>
+                            <th data-options="field:'productid',width:80">指令执行时间</th>
+                        </tr>
+                        </thead>-->
+                        <tbody id="ykssjs">
+
+                        </tbody>
                     </table>
+
                 </div>
             </div>
             <!--下边的各种监视-->
@@ -242,446 +292,466 @@
                     <div class="sequence_watch_title">
                         遥控序列监视
                     </div>
-                    <table class="flySystem_current_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <!--  <table id="111"  class="easyui-datagrid " width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr style="background: #96b5ea;font-size: 12px;">
-
                             <th>指令代号</th>
                             <th>发令站</th>
                             <th>发令时间</th>
                             <th>注入数据文件/指令</th>
+
                         </tr>
+                    </table>-->
+                    <table id="yk_quence_table" class="flySystem_current_table  "  width="100%" border="0" cellspacing="0" cellpadding="0"
+                           style="width: 100%;height:265px;background: #d5e5f9;" data-options="singleSelect:true,collapsible:true,autoRowHeight:true,">
+                        <thead>
+                            <tr style="background: #96b5ea;font-size: 12px;">
+                                <th data-options="field:'itemid',width:'150px',align:'left',nowrap:false"></th>
+                                <th data-options="field:'voice',width:50">发令站</th>
+                                <th data-options="field:'time',width:50,align:'left'">发令时间</th>
+                                <th data-options="field:'invest',width:50,align:'left'">发令时间</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                                <tr>
+                                    <td>SYN502</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:10:11</td>
+                                    <td>DYSJ10033</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN801</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:10:14</td>
+                                    <td>DYSJ19388</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN511</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:10:17</td>
+                                    <td>DYSJ10392</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN503</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:10:20</td>
+                                    <td>DYSJ28390</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN510</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:10:31</td>
+                                    <td>DYSJ10938</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN910</td>
+                                    <td>JD</td>
+                                    <td>2017-05-17 14:10:32</td>
+                                    <td>DYSJ15362</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN902</td>
+                                    <td>JD</td>
+                                    <td>2017-05-17 14:10:33</td>
+                                    <td>DYSJ12009</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM900</td>
+                                    <td>JD</td>
+                                    <td>2017-05-17 14:10:34</td>
+                                    <td>DYSJ18292</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM910</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:10:35</td>
+                                    <td>DYSJ19382</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM501</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:11:16</td>
+                                    <td>DYSJ10029</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN527</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:11:26</td>
+                                    <td>DYSJ19930</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN808</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:11:29</td>
+                                    <td>DYSJ10000</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN806</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:11:32</td>
+                                    <td>DYSJ28390</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN810</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:12:26</td>
+                                    <td>DYSJ10923</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY101</td>
+                                    <td>JD</td>
+                                    <td>2017-05-17 14:13:35</td>
+                                    <td>DYSJ10938</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY106</td>
+                                    <td>JD</td>
+                                    <td>2017-05-17 14:14:55</td>
+                                    <td>DYSJ19830</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY107</td>
+                                    <td>JD</td>
+                                    <td>2017-05-17 14:15:25</td>
+                                    <td>DYSJ10392</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY710</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:15:55</td>
+                                    <td>DYSJ28190</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM531</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:16:25</td>
+                                    <td>DYSJ14243</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM613</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:16:55</td>
+                                    <td>DYSJ47769</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM603</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:17:25</td>
+                                    <td>DYSJ57439</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM906</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:17:55</td>
+                                    <td>DYSJ58648</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM430</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:18:25</td>
+                                    <td>DYSJ10033</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM301</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:18:55</td>
+                                    <td>DYSJ19388</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM053</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:19:25</td>
+                                    <td>DYSJ10392</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM208</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:22:05</td>
+                                    <td>DYSJ28390</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM402</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:22:35</td>
+                                    <td>DYSJ47690</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM894</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:23:05</td>
+                                    <td>DYSJ56843</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM298</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:23:35</td>
+                                    <td>DYSJ55757</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM493</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:24:05</td>
+                                    <td>DYSJ45736</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM291</td>
+                                    <td>HK</td>
+                                    <td>2017-05-17 14:24:35</td>
+                                    <td>DYSJ34665</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM930</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:25:05</td>
+                                    <td>DYSJ56736</td>
+                                </tr>
+                                <tr>
+                                    <td>SPM298</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:25:35</td>
+                                    <td>DYSJ46349</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY297</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:26:05</td>
+                                    <td>DYSJ57470</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY296</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:27:05</td>
+                                    <td>DYSJ12009</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY904</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:27:35</td>
+                                    <td>DYSJ18292</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY280</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:28:05</td>
+                                    <td>DYSJ19382</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY271</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:28:35</td>
+                                    <td>DYSJ10029</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY338</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:29:05</td>
+                                    <td>DYSJ19930</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY905</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:31:26</td>
+                                    <td>DYSJ10000</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY176</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:31:29</td>
+                                    <td>DYSJ10923</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY166</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:31:32</td>
+                                    <td>DYSJ10938</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY190</td>
+                                    <td>LM</td>
+                                    <td>2017-05-17 14:32:26</td>
+                                    <td>DYSJ19830</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY726</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:33:35</td>
+                                    <td>DYSJ10039</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY285</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:34:55</td>
+                                    <td>DYSJ10392</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY166</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:35:32</td>
+                                    <td>DYSJ28190</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY531</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:35:37</td>
+                                    <td>DYSJ56325</td>
+                                </tr>
+                                <tr>
+                                    <td>CSY553</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:35:42</td>
+                                    <td>DYSJ45794</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN218</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:35:47</td>
+                                    <td>DYSJ34683</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN279</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:35:52</td>
+                                    <td>DYSJ10938</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN883</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:35:57</td>
+                                    <td>DYSJ34288</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN422</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:36:17</td>
+                                    <td>DYSJ43479</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN399</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:36:22</td>
+                                    <td>DYSJ65847</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN229</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:37:30</td>
+                                    <td>DYSJ57489</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN290</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:37:03</td>
+                                    <td>DYSJ48933</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN568</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:38:33</td>
+                                    <td>DYSJ45733</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN100</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:38:03</td>
+                                    <td>DYSJ37993</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN379</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:39:33</td>
+                                    <td>DYSJ34773</td>
+                                </tr>
+                                <tr>
+                                    <td>SYN290</td>
+                                    <td>JM</td>
+                                    <td>2017-05-17 14:39:51</td>
+                                    <td>DYSJ18224</td>
+                                </tr>
+
+                        </tbody>
                     </table>
-                    <div style="overflow-y:visible; overflow-x:hidden;height: 250px;">
-                    <table id="111" style="background: #d5e5f9;" class="flySystem_current_table"width="100%" border="0" cellspacing="0" cellpadding="0">
-                       
-                        <tr>
-                            <td>SYN502</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:10:11</td>
-                            <td>DYSJ10033</td>
-                        </tr>
-                        <tr>
-                            <td>SYN801</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:10:14</td>
-                            <td>DYSJ19388</td>
-                        </tr>
-                        <tr>
-                            <td>SYN511</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:10:17</td>
-                            <td>DYSJ10392</td>
-                        </tr>
-                        <tr>
-                            <td>SYN503</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:10:20</td>
-                            <td>DYSJ28390</td>
-                        </tr>
-                        <tr>
-                            <td>SYN510</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:10:31</td>
-                            <td>DYSJ10938</td>
-                        </tr>
-                        <tr>
-                            <td>SYN910</td>
-                            <td>JD</td>
-                            <td>2017-05-17 14:10:32</td>
-                            <td>DYSJ15362</td>
-                        </tr>
-                        <tr>
-                            <td>SYN902</td>
-                            <td>JD</td>
-                            <td>2017-05-17 14:10:33</td>
-                            <td>DYSJ12009</td>
-                        </tr>
-                        <tr>
-                            <td>SPM900</td>
-                            <td>JD</td>
-                            <td>2017-05-17 14:10:34</td>
-                            <td>DYSJ18292</td>
-                        </tr>
-                        <tr>
-                            <td>SPM910</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:10:35</td>
-                            <td>DYSJ19382</td>
-                        </tr>
-                        <tr>
-                            <td>SPM501</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:11:16</td>
-                            <td>DYSJ10029</td>
-                        </tr>
-                        <tr>
-                            <td>SYN527</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:11:26</td>
-                            <td>DYSJ19930</td>
-                        </tr>
-                        <tr>
-                            <td>SYN808</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:11:29</td>
-                            <td>DYSJ10000</td>
-                        </tr>
-                        <tr>
-                            <td>SYN806</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:11:32</td>
-                            <td>DYSJ28390</td>
-                        </tr>
-                        <tr>
-                            <td>SYN810</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:12:26</td>
-                            <td>DYSJ10923</td>
-                        </tr>
-                        <tr>
-                            <td>CSY101</td>
-                            <td>JD</td>
-                            <td>2017-05-17 14:13:35</td>
-                            <td>DYSJ10938</td>
-                        </tr>
-                        <tr>
-                            <td>CSY106</td>
-                            <td>JD</td>
-                            <td>2017-05-17 14:14:55</td>
-                            <td>DYSJ19830</td>
-                        </tr>
-                        <tr>
-                            <td>CSY107</td>
-                            <td>JD</td>
-                            <td>2017-05-17 14:15:25</td>
-                            <td>DYSJ10392</td>
-                        </tr>
-                        <tr>
-                            <td>CSY710</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:15:55</td>
-                            <td>DYSJ28190</td>
-                        </tr>
-                        <tr>
-                            <td>SPM531</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:16:25</td>
-                            <td>DYSJ14243</td>
-                        </tr>
-                        <tr>
-                            <td>SPM613</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:16:55</td>
-                            <td>DYSJ47769</td>
-                        </tr>
-                        <tr>
-                            <td>SPM603</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:17:25</td>
-                            <td>DYSJ57439</td>
-                        </tr>
-                        <tr>
-                            <td>SPM906</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:17:55</td>
-                            <td>DYSJ58648</td>
-                        </tr>
-                        <tr>
-                            <td>SPM430</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:18:25</td>
-                            <td>DYSJ10033</td>
-                        </tr>
-                        <tr>
-                            <td>SPM301</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:18:55</td>
-                            <td>DYSJ19388</td>
-                        </tr>
-                        <tr>
-                            <td>SPM053</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:19:25</td>
-                            <td>DYSJ10392</td>
-                        </tr>
-                        <tr>
-                            <td>SPM208</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:22:05</td>
-                            <td>DYSJ28390</td>
-                        </tr>
-                        <tr>
-                            <td>SPM402</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:22:35</td>
-                            <td>DYSJ47690</td>
-                        </tr>
-                        <tr>
-                            <td>SPM894</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:23:05</td>
-                            <td>DYSJ56843</td>
-                        </tr>
-                        <tr>
-                            <td>SPM298</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:23:35</td>
-                            <td>DYSJ55757</td>
-                        </tr>
-                        <tr>
-                            <td>SPM493</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:24:05</td>
-                            <td>DYSJ45736</td>
-                        </tr>
-                        <tr>
-                            <td>SPM291</td>
-                            <td>HK</td>
-                            <td>2017-05-17 14:24:35</td>
-                            <td>DYSJ34665</td>
-                        </tr>
-                        <tr>
-                            <td>SPM930</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:25:05</td>
-                            <td>DYSJ56736</td>
-                        </tr>
-                        <tr>
-                            <td>SPM298</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:25:35</td>
-                            <td>DYSJ46349</td>
-                        </tr>
-                        <tr>
-                            <td>CSY297</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:26:05</td>
-                            <td>DYSJ57470</td>
-                        </tr>
-                        <tr>
-                            <td>CSY296</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:27:05</td>
-                            <td>DYSJ12009</td>
-                        </tr>
-                        <tr>
-                            <td>CSY904</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:27:35</td>
-                            <td>DYSJ18292</td>
-                        </tr>
-                        <tr>
-                            <td>CSY280</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:28:05</td>
-                            <td>DYSJ19382</td>
-                        </tr>
-                        <tr>
-                            <td>CSY271</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:28:35</td>
-                            <td>DYSJ10029</td>
-                        </tr>
-                        <tr>
-                            <td>CSY338</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:29:05</td>
-                            <td>DYSJ19930</td>
-                        </tr>
-                        <tr>
-                            <td>CSY905</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:31:26</td>
-                            <td>DYSJ10000</td>
-                        </tr>
-                        <tr>
-                            <td>CSY176</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:31:29</td>
-                            <td>DYSJ10923</td>
-                        </tr>
-                        <tr>
-                            <td>CSY166</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:31:32</td>
-                            <td>DYSJ10938</td>
-                        </tr>
-                        <tr>
-                            <td>CSY190</td>
-                            <td>LM</td>
-                            <td>2017-05-17 14:32:26</td>
-                            <td>DYSJ19830</td>
-                        </tr>
-                        <tr>
-                            <td>CSY726</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:33:35</td>
-                            <td>DYSJ10039</td>
-                        </tr>
-                        <tr>
-                            <td>CSY285</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:34:55</td>
-                            <td>DYSJ10392</td>
-                        </tr>
-                        <tr>
-                            <td>CSY166</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:35:32</td>
-                            <td>DYSJ28190</td>
-                        </tr>
-                        <tr>
-                            <td>CSY531</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:35:37</td>
-                            <td>DYSJ56325</td>
-                        </tr>
-                        <tr>
-                            <td>CSY553</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:35:42</td>
-                            <td>DYSJ45794</td>
-                        </tr>
-                        <tr>
-                            <td>SYN218</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:35:47</td>
-                            <td>DYSJ34683</td>
-                        </tr>
-                        <tr>
-                            <td>SYN279</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:35:52</td>
-                            <td>DYSJ10938</td>
-                        </tr>
-                        <tr>
-                            <td>SYN883</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:35:57</td>
-                            <td>DYSJ34288</td>
-                        </tr>
-                        <tr>
-                            <td>SYN422</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:36:17</td>
-                            <td>DYSJ43479</td>
-                        </tr>
-                        <tr>
-                            <td>SYN399</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:36:22</td>
-                            <td>DYSJ65847</td>
-                        </tr>
-                        <tr>
-                            <td>SYN229</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:37:30</td>
-                            <td>DYSJ57489</td>
-                        </tr>
-                        <tr>
-                            <td>SYN290</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:37:03</td>
-                            <td>DYSJ48933</td>
-                        </tr>
-                        <tr>
-                            <td>SYN568</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:38:33</td>
-                            <td>DYSJ45733</td>
-                        </tr>
-                        <tr>
-                            <td>SYN100</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:38:03</td>
-                            <td>DYSJ37993</td>
-                        </tr>
-                        <tr>
-                            <td>SYN379</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:39:33</td>
-                            <td>DYSJ34773</td>
-                        </tr>
-                        <tr>
-                            <td>SYN290</td>
-                            <td>JM</td>
-                            <td>2017-05-17 14:39:51</td>
-                            <td>DYSJ18224</td>
-                        </tr>
-                    </table>
+
+
+
+                    <div style="overflow-y:scroll; overflow-x:hidden;background: #d5e5f9;">
+                        <table class="control_effect_table " id="ykxljs" width="100%" border="0" cellspacing="0" cellpadding="0"
+                        >
+
+                        </table>
                     </div>
-                    
                 </div>
                 <!--已发命令-->
                 <div class="publish_order_box" style=" background: #d5e5f9;">
                     <div class="publish_order_title">
                         已发程控指令下传(数管)
                     </div>
-                    <table class="flySystem_current_table" width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr style="background: #96b5ea;font-size: 12px;">
+                    <table id="yk_instructions_table" class="control_effect_table  easyui-datagrid" width="100%" border="0" cellspacing="0" cellpadding="0"
+                           style="width: 100%;height:265px;background: #d5e5f9;" data-options="singleSelect:true,collapsible:true,autoRowHeight:true,">
+                            <thead>
+                                 <tr style="background: #96b5ea;font-size: 12px;">
 
-                            <th>指令名称</th>
-                            <th>执行时间</th>
-                            <th>执行结果</th>
+                                    <th>指令名称</th>
+                                    <th>执行时间</th>
+                                    <th>执行结果</th>
 
-                        </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                    </table>
-                    <div style="overflow-y:visible; overflow-x:hidden;height: 250px;">
-                        <table class="control_effect_table " width="100%" border="0" cellspacing="0" cellpadding="0"
-                        >
-                            <tr>
-                                <td>0000000</td>
-                                <td>0:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000001</td>
-                                <td>1:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000002</td>
-                                <td>2:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000003</td>
-                                <td>3:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000004</td>
-                                <td>4:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000005</td>
-                                <td>5:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000006</td>
-                                <td>6:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000007</td>
-                                <td>7:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000008</td>
-                                <td>8:00:00</td>
-                                <td>正常</td>
-                            </tr>
-                            <tr>
-                                <td>0000009</td>
-                                <td>9:00:00</td>
-                                <td>正常</td>
-                            </tr>
+                                <tr>
+                                    <td>0000000</td>
+                                    <td>0:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000001</td>
+                                    <td>1:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000002</td>
+                                    <td>2:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000003</td>
+                                    <td>3:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000004</td>
+                                    <td>4:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000005</td>
+                                    <td>5:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000006</td>
+                                    <td>6:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000007</td>
+                                    <td>7:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000008</td>
+                                    <td>8:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td>0000009</td>
+                                    <td>9:00:00</td>
+                                    <td>正常</td>
+                                </tr>
+                            </tbody>
                         </table>
-                    </div>
+
                 </div>
                 <!--控制效果-->
                 <div class="control_effect_box" style=" background: #d5e5f9;">
@@ -689,137 +759,197 @@
                         控制效果监视
                     </div>
 
-                    <table class="control_effect_table " width="100%" border="0" cellspacing="0" cellpadding="0"
-                           >
+<!--                    <table class="  control_effect_table easyui-datagrid "  width="100%" border="0" cellspacing="0" cellpadding="0"
+                           style="width: 100%;height:265px;background: #d5e5f9;" data-options="singleSelect:true,collapsible:true,autoRowHeight:true,">
                         <thead>
-
-                        <tr style="background: #96b5ea; font-size: 12px;">
-                            <th  colspan="6">正常</th>
+                        <tr>
+                            <td colspan="6">正常</td>
+                            <td colspan="6">正常</td>
+                            <td colspan="6">正常</td>
+                            <td colspan="6">正常</td>
+                            <td colspan="6">正常</td>
+                            <td colspan="6">正常</td>
                         </tr>
                         </thead>
+                        <tbody>
+
+                        <tr>
+                            <td>A发数</td>
+                            <td>备用</td>
+                            <td>A密态</td>
+                            <td>A电压正常</td>
+                            <td>A认知正确</td>
+                            <td>A密码计数</td>
+                        </tr>
+                        <tr>
+                            <td>B发数</td>
+                            <td>备用</td>
+                            <td>B密态</td>
+                            <td>B电压正常</td>
+                            <td>B认知正确</td>
+                            <td>B密码计数</td>
+                        </tr>
+                        <tr>
+                            <td>A数管有效</td>
+                            <td>AGNC有效</td>
+                            <td>A010正常</td>
+                            <td>A载荷有效</td>
+                            <td>A数据可用</td>
+                            <td>A开门</td>
+                        </tr>
+                        <tr>
+                            <td>B数管有效</td>
+                            <td>BGNC有效</td>
+                            <td>B010正常</td>
+                            <td>B载荷有效</td>
+                            <td>B数据可用</td>
+                            <td>B开门</td>
+                        </tr>
+                        <tr>
+                            <td>A应答机有效</td>
+                            <td>A解调已通</td>
+                            <td>A空转发生变化</td>
+                            <td>中继ss有效</td>
+                            <td>中继ca有效</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>B应答机有效</td>
+                            <td>B解调已通</td>
+                            <td>B空转发生变化</td>
+                            <td>中继ss有效</td>
+                            <td>中继ca有效</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                        </table>-->
+                    <table id="yk_control_table" class="easyui-datagrid control_effect_table  easyui-datagrid" width="100%" border="0" cellspacing="0" cellpadding="0"
+                           style="width: 100%;height:265px;background: #d5e5f9;" data-options="singleSelect:true,collapsible:true,autoRowHeight:true,">
+                        <thead>
+                        <tr style="background: #96b5ea;font-size: 12px;">
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td>A发数</td>
+                            <td>备用</td>
+                            <td>A密态</td>
+                            <td>A电压正常</td>
+                            <td>A认知正确</td>
+                            <td>A密码计数</td>
+                        </tr>
+                        <tr>
+                            <td>B发数</td>
+                            <td>备用</td>
+                            <td>B密态</td>
+                            <td>B电压正常</td>
+                            <td>B认知正确</td>
+                            <td>B密码计数</td>
+                        </tr>
+                        <tr>
+                            <td>A数管有效</td>
+                            <td>AGNC有效</td>
+                            <td>A010正常</td>
+                            <td>A载荷有效</td>
+                            <td>A数据可用</td>
+                            <td>A开门</td>
+                        </tr>
+                        <tr>
+                            <td>B数管有效</td>
+                            <td>BGNC有效</td>
+                            <td>B010正常</td>
+                            <td>B载荷有效</td>
+                            <td>B数据可用</td>
+                            <td>B开门</td>
+                        </tr>
+                        <tr>
+                            <td>A应答机有效</td>
+                            <td>A解调已通</td>
+                            <td>A空转发生变化</td>
+                            <td>中继ss有效</td>
+                            <td>中继ca有效</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>B应答机有效</td>
+                            <td>B解调已通</td>
+                            <td>B空转发生变化</td>
+                            <td>中继ss有效</td>
+                            <td>中继ca有效</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
                     </table>
-                    <div style="overflow-y:visible; overflow-x:hidden;height: 250px;">
-                        <table class="control_effect_table " style="font-size: 14px;" width="100%" border="0" cellspacing="0" cellpadding="0"
-                        >
-                            <tr>
-                                <td>A发数</td>
-                                <td>备用</td>
-                                <td>A密态</td>
-                                <td>A电压正常</td>
-                                <td>A认知正确</td>
-                                <td>A密码计数</td>
-                            </tr>
-                            <tr>
-                                <td>B发数</td>
-                                <td>备用</td>
-                                <td>B密态</td>
-                                <td>B电压正常</td>
-                                <td>B认知正确</td>
-                                <td>B密码计数</td>
-                            </tr>
-                            <tr>
-                                <td>A数管有效</td>
-                                <td>AGNC有效</td>
-                                <td>A010正常</td>
-                                <td>A载荷有效</td>
-                                <td>A数据可用</td>
-                                <td>A开门</td>
-                            </tr>
-                            <tr>
-                                <td>B数管有效</td>
-                                <td>BGNC有效</td>
-                                <td>B010正常</td>
-                                <td>B载荷有效</td>
-                                <td>B数据可用</td>
-                                <td>B开门</td>
-                            </tr>
-                            <tr>
-                                <td>A应答机有效</td>
-                                <td>A解调已通</td>
-                                <td>A空转发生变化</td>
-                                <td>中继ss有效</td>
-                                <td>中继ca有效</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>B应答机有效</td>
-                                <td>B解调已通</td>
-                                <td>B空转发生变化</td>
-                                <td>中继ss有效</td>
-                                <td>中继ca有效</td>
-                                <td></td>
-                            </tr>
-                        </table>
-                    </div>
+
                 </div>
                 <!--设备状态-->
                 <div class="device_status_box" style=" background: #d5e5f9;">
                     <div class="device_status_title">
                         设备状态监视
                     </div>
-                    <table class="flySystem_current_table"width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr style="background: #96b5ea; font-size: 12px;">
-                            <th>12</th>
-                            <th>A</th>
-                            <th>B</th>
 
+                    <table class="easyui-datagrid" id="example" title="" style="width: 100%;height:265px;background: #d5e5f9;" data-options="singleSelect:true,collapsible:true,autoRowHeight:true,">
+                        <thead>
+                        <tr>
+                            <th data-options="field:'itemid',width:'150px',align:'left',nowrap:false"></th>
+                            <th data-options="field:'voice',width:50">发令站</th>
+                            <th data-options="field:'time',width:50,align:'left'">发令时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>应答机线路状态</td>
+                            <td>开</td>
+                            <td>关</td>
+                        </tr>
+                        <tr>
+                            <td>应答机锁定</td>
+                            <td>1.000</td>
+                            <td>0.000</td>
+                        </tr>
+                        <tr>
+                            <td>数据接口</td>
+                            <td>1.000</td>
+                            <td>0.000</td>
+                        </tr>
+                        <tr>
+                            <td>数据电压</td>
+                            <td>5.083</td>
+                            <td>0.000</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">前向宽波可用标志</td>
+                        </tr>
+                        <tr>
+                            <td>中继锁定</td>
+                            <td>锁定</td>
+                            <td>未锁定</td>
+                        </tr>
+                        <tr>
+                            <td>中继同步</td>
+                            <td>同步</td>
+                            <td>未同步</td>
+                        </tr>
+                        <tr>
+                            <td>ASC锁定</td>
+                            <td>锁定</td>
+                            <td>未锁定</td>
+                        </tr>
+                        <tr>
+                            <td>ASV同步</td>
+                            <td>同步</td>
+                            <td>未同步</td>
+                        </tr>
+                        <tr>
+                            <td>宽波状态</td>
+                            <td>稳定</td>
+                            <td>未稳定</td>
                         </tr>
 
+                        </tbody>
                     </table>
-                    <div style="overflow-y:visible; overflow-x:hidden;height: 250px;">
-                        <table class="control_effect_table " width="100%" border="0" cellspacing="0" cellpadding="0"
-                        >
-
-                            <tr>
-                                <td>应答机线路状态</td>
-                                <td>开</td>
-                                <td>关</td>
-                            </tr>
-                            <tr>
-                                <td>应答机锁定</td>
-                                <td>1.000</td>
-                                <td>0.000</td>
-                            </tr>
-                            <tr>
-                                <td>数据接口</td>
-                                <td>1.000</td>
-                                <td>0.000</td>
-                            </tr>
-                            <tr>
-                                <td>数据电压</td>
-                                <td>5.083</td>
-                                <td>0.000</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">前向宽波可用标志</td>
-                            </tr>
-                            <tr>
-                                <td>中继锁定</td>
-                                <td>锁定</td>
-                                <td>未锁定</td>
-                            </tr>
-                            <tr>
-                                <td>中继同步</td>
-                                <td>同步</td>
-                                <td>未同步</td>
-                            </tr>
-                            <tr>
-                                <td>ASC锁定</td>
-                                <td>锁定</td>
-                                <td>未锁定</td>
-                            </tr>
-                            <tr>
-                                <td>ASV同步</td>
-                                <td>同步</td>
-                                <td>未同步</td>
-                            </tr>
-                            <tr>
-                                <td>宽波状态</td>
-                                <td>稳定</td>
-                                <td>未稳定</td>
-                            </tr>
-                        </table>
-                    </div>
                 </div>
             </div>
             <!--下边最后的各种详情-->
@@ -836,5 +966,78 @@
 <script src="js/deal.js"></script>
 <script src="js/jquery-1.4.4.min.js"></script>
 <script src="js/jquery.easyui.min.js"></script>
+<script>
+    $('#example').datagrid({
+        columns:[[
+            {field:'code',title:'',width:100,fitColumns :true,nowarp : false,
+            },
+            {field:'name',title:'A',width:45,
+            },
+            {field:'price',title:'B',width:50,align:'left',
+            },
+        ]],
+        rowStyler:function(index,row){
+            return 'background-color:#d4e4f8;';
+        }
+
+    });
+    $('#yk_quence_table').datagrid({
+        columns:[[
+            {field:'code',title:'指令代号',width:50,fitColumns :true,nowarp : false,
+            },
+            {field:'name',title:'发令站',width:40,
+            },
+            {field:'price',title:'发令时间',width:120,align:'left',
+            },
+            {field:'invest',title:'注入数据文件/指令',width:100,align:'left',
+            },
+        ]],
+        rowStyler:function(index,row){
+            return 'background-color:#d4e4f8;';
+        }
+    });
+    //已发程控指令初始化
+    $('#yk_instructions_table').datagrid({
+        columns:[[
+            {field:'code',title:'执行命令',width:70,fitColumns :true,nowarp : false,
+            },
+            {field:'time',title:'执行时间',width:70,
+            },
+
+            {field:'invest',title:'执行结果',width:70,align:'left',
+            },
+        ]],
+        rowStyler:function(index,row){
+            return 'background-color:#d4e4f8;';
+        }
+    });
+    //控制效果展示
+    $('#yk_control_table').datagrid({
+        columns:[[
+            {field:'code', title:'',fitColumns :true,nowarp : false,
+            },
+            {field:'code1',title:'',fitColumns :true,nowarp : false,
+            },
+            {field:'code2',title:'正常',fitColumns :true,nowarp : false,
+            },
+            {field:'code3', title:'',fitColumns :true,nowarp : false,
+            },
+            {field:'code4',title:'',fitColumns :true,nowarp : false,
+            },
+            {field:'code5',title:'',fitColumns :true,nowarp : false,
+            },
+
+        ]],
+        rowStyler:function(index,row){
+            return 'background-color:#d4e4f8;';
+        }
+    });
+    //设置左边默认选中
+    var addr_tree = $("#mytree").tree({
+        onLoadSuccess:function(node,data){
+            $("#_easyui_tree_10 ").addClass("tree-node-selected");   //设置第一个节点高亮
+        }
+    });
+</script>
 </body>
 </html>

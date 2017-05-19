@@ -393,7 +393,7 @@ a{
 
 .tbStyle1{
     font-family:Verdana,Arial,sans-serif;
-    font-size:11px;
+    font-size:13px;
     color:#333;
     border-width:1px;
     border-color:#666;
@@ -416,9 +416,12 @@ a{
     /*background-color:#FFF;*/
 }
 
-
-
 .tabs-title{
     font-size:14px;
+}
+
+.datagrid-header .datagrid-cell span {
+    font-size: 12px;
+    font-weight: 700;
 }
 

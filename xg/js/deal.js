@@ -43,7 +43,7 @@ function listView(time) {
         real_time_watch_number=real_time_watch_number+1;
         $('#ykssjs').append(
             '<tr><td>'+real_time_watch_number+'</td><td>' + ykssjs[0][0] +
-            '</td><td>' +
+            '</td><td>实验用sne指令描述语句' +
             '</td><td>' +
             '</td><td>' + ykssjs[0][5] +
             '</td><td>' + ykssjs[0][1] +

@@ -27,6 +27,12 @@ function listView(time) {
     //            '</td></tr>');
     //        ykxljs.splice(0, 1);
     //    }
+    if(sdzr[0][2]==time){
+        $('#sdffff').text(sdzr[0][0]);
+        $('#addrffff').text(sdzr[0][1]);
+        sdzr.splice(0, 1);
+    }
+    
     if (ykssjs[0][2] == time) {
         var sts = new Date(time).getTime();
         var idddsj = sts + 5000;

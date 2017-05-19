@@ -32,13 +32,14 @@ function listView(time) {
         var idddsj = sts + 5000;
         var idzxsj = sts + 15000;
         var ddsjDiv = "";
-        if (ykssjs[0][3] == 'red') {
-            ddsjDiv = redDiv;
-        }
+//        if (ykssjs[0][3] == 'red') {
+//            ddsjDiv = redDiv;
+//        }
         var zxsjDiv = "";
-        if (ykssjs[0][4] == 'red') {
-            zxsjDiv = redDiv;
-        }
+//        if (ykssjs[0][4] == 'red') {
+//            zxsjDiv = redDiv;
+//        }
+        
         var yl = ykxljs.length,
             addr = '';
         if(ykssjs[0][0]=='SD101'){

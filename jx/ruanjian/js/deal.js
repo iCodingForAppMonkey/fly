@@ -1,5 +1,5 @@
 var startTime = new Date('2017-05-17 14:10:00').getTime();
-var redDiv='<div style="background-color:red">&nbsp;</div>';
+var redDiv = '<div style="background-color:red">&nbsp;</div>';
 $(function () {
     $('.zh-begin').click(function () {
         parent.window.$('#task_time').text('2017-05-17 14:10:00');
@@ -16,14 +16,7 @@ $(function () {
 function listView(time) {
     if (ykssjs[0][2] == time) {
         var idx = $('#ykssjs').datagrid('getRows').length;
-        var ddsjDiv="";
-        if(ykssjs[0][3]=='red'){
-            ddsjDiv=redDiv;
-        }
-        var zxsjDiv="";
-        if(ykssjs[0][4]=='red'){
-            zxsjDiv=redDiv;
-        }
+
         $('#ykssjs').datagrid('insertRow', {
             index: idx, // index start with 0
             row: {
@@ -32,29 +25,29 @@ function listView(time) {
                 proxyno: ykssjs[0][5],
                 fltj: ykssjs[0][1],
                 fssj: ykssjs[0][2],
-                ddsj: ddsjDiv,
-                zxsj: zxsjDiv
+                ddsj: '',
+                zxsj: ''
             }
         });
-        if(ykssjs[0][5]=='手动'){
-            $('#noticeBybackground').css('background-color','yellow');
-            setTimeout(function (){
-                       $('#noticeBybackground').css('background-color','white');
-            },60000);
+        if (ykssjs[0][5] == '手动') {
+            $('#noticeBybackground').css('background-color', 'yellow');
+            setTimeout(function () {
+                $('#noticeBybackground').css('background-color', 'white');
+            }, 60000);
         }
         //到达时间，执行时间处理
-        jstimes(idx,ykssjs[0][3],ykssjs[0][4]);
-        
+        jstimes(idx, ykssjs[0][3], ykssjs[0][4]);
+
         parent.window.viewJkxgjs(ykssjs[0][6]);
-        
+
         parent.window.viewSbztjs(ykssjs[0][7]);
-        
+
         ykssjs.splice(0, 1);
     }
 }
 
-function jstimes(idx,ddsj,zxsj) {
-    if(ddsj==''){
+function jstimes(idx, ddsj, zxsj) {
+    if (ddsj == '') {
         setTimeout((function (ixd) {
             return function () {
                 $('#ykssjs').datagrid('updateRow', {
@@ -66,7 +59,7 @@ function jstimes(idx,ddsj,zxsj) {
             }
         })(idx), 5000);
     }
-    if(zxsj==''){
+    if (zxsj == '') {
         setTimeout((function (ixd) {
             return function () {
                 $('#ykssjs').datagrid('updateRow', {
@@ -78,6 +71,30 @@ function jstimes(idx,ddsj,zxsj) {
             }
         })(idx), 15000);
     }
+
+
+    if (ddsj == 'red') {
+        setTimeout((function (ixd) {
+            return function () {
+                $('#ykssjs').datagrid('updateRow', {
+                    index: ixd,
+                    row: {
+                        ddsj: redDiv
+                    }
+                });
+            }
+        })(idx), 5000);
+    }
+    if (ykssjs[0][4] == 'red') {
+        setTimeout((function (ixd) {
+            return function () {
+                $('#ykssjs').datagrid('updateRow', {
+                    index: ixd,
+                    row: {
+                        zxsj: redDiv
+                    }
+                });
+            }
+        })(idx), 15000);
+    }
 }
-
-

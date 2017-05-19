@@ -49,12 +49,9 @@ function listView(time) {
                 zxsj: ''
             }
         });
-//        if (ykssjs[0][5] == '手动') {
-//            $('#noticeBybackground').css('background-color', 'yellow');
-//            setTimeout(function () {
-//                $('#noticeBybackground').css('background-color', 'white');
-//            }, 60000);
-//        }
+        if (ykssjs[0][5] == '手动') {
+            $('#noticeBybackground').css('background-color', 'white');
+        }
         //到达时间，执行时间处理
         jstimes(idx, ykssjs[0][3], ykssjs[0][4]);
 

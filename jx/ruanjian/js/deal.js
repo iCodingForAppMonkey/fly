@@ -38,7 +38,7 @@ function listView(time) {
         });
         if(ykssjs[0][5]=='手动'){
             $('#noticeBybackground').css('background-color','yellow');
-            setTimeout(funciton (){
+            setTimeout(function (){
                        $('#noticeBybackground').css('background-color','white');
             },60000);
         }

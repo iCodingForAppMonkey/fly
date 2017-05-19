@@ -36,10 +36,11 @@ function listView(time) {
                 zxsj: zxsjDiv
             }
         });
-        if(ykssjs[0][5]=='计划'){
-            $('#noticeBybackground').css('background-color','white');
-        }else{
+        if(ykssjs[0][5]=='手动'){
             $('#noticeBybackground').css('background-color','yellow');
+            setTimeout(funciton (){
+                       $('#noticeBybackground').css('background-color','white');
+            },60000);
         }
         //到达时间，执行时间处理
         jstimes(idx,ykssjs[0][3],ykssjs[0][4]);

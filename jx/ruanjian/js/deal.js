@@ -25,13 +25,14 @@ function listView(time) {
             }
         });
         sdzr.splice(0, 1);
-        fIndex++;
+        
         if(fIndex==0){
             $('#noticeBybackground').css('background-color', 'yellow');
             setTimeout(function () {
                 $('#noticeBybackground').css('background-color', 'white');
             }, 60000);
         }
+        fIndex++;
     }
     
     if (ykssjs[0][2] == time) {

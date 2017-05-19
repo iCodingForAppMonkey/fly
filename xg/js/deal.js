@@ -27,64 +27,69 @@ function listView(time) {
     //            '</td></tr>');
     //        ykxljs.splice(0, 1);
     //    }
-    if(sdzr[0][2]==time){
-        $('#sdffff').text(sdzr[0][0]);
-        $('#addrffff').text(sdzr[0][1]);
-        sdzr.splice(0, 1);
+    if (sdzr[0]) {
+        if (sdzr[0][2] == time) {
+            $('#sdffff').text(sdzr[0][0]);
+            $('#addrffff').text(sdzr[0][1]);
+            sdzr.splice(0, 1);
+        }
     }
-    
-    if (ykssjs[0][2] == time) {
-        var sts = new Date(time).getTime();
-        var idddsj = sts + 5000;
-        var idzxsj = sts + 15000;
-        var ddsjDiv = "";
-//        if (ykssjs[0][3] == 'red') {
-//            ddsjDiv = redDiv;
-//        }
-        var zxsjDiv = "";
-//        if (ykssjs[0][4] == 'red') {
-//            zxsjDiv = redDiv;
-//        }
-        
-        var yl = ykxljs.length,
-            addr = '';
-        if(ykssjs[0][0]=='SD101'){
-             addr = 'LM';
-        }else{
-            for (var y = 0; y < yl; y++) {
-                if (ykxljs[y][0] == ykssjs[0][0]) {
-                    addr = ykxljs[y][1];
+
+    if (ykssjs[0]) {
+        if (ykssjs[0][2] == time) {
+            var sts = new Date(time).getTime();
+            var idddsj = sts + 5000 + "ddsj";
+            var idzxsj = sts + 15000 + "zxsj";
+            var ddsjDiv = "";
+            //        if (ykssjs[0][3] == 'red') {
+            //            ddsjDiv = redDiv;
+            //        }
+            var zxsjDiv = "";
+            //        if (ykssjs[0][4] == 'red') {
+            //            zxsjDiv = redDiv;
+            //        }
+
+            var yl = ykxljs.length,
+                addr = '';
+            if (ykssjs[0][0] == 'SD101') {
+                addr = 'LM';
+            } else {
+                for (var y = 0; y < yl; y++) {
+                    if (ykxljs[y][0] == ykssjs[0][0]) {
+                        addr = ykxljs[y][1];
+                    }
                 }
             }
-        }
-        
-        //实时监控序号
-        real_time_watch_number = real_time_watch_number + 1;
-        $('#ykssjs').append(
-            '<tr><td>' + real_time_watch_number + '</td><td>' + ykssjs[0][0] +
-            '</td><td>实验用sne指令描述语句' +
-            '</td><td>' + addr +
-            '</td><td>' + ykssjs[0][5] +
-            '</td><td>' + ykssjs[0][1] +
-            '</td><td>' + ykssjs[0][2] +
-            '</td><td id="' + idddsj + '">' + ddsjDiv +
-            '</td><td id="' + idzxsj + '">' + zxsjDiv +
-            '</td></tr>');
-        //添加完数据后，滚动条在最底部
-        var div = document.getElementById('current_watch_scroll');
-        div.scrollTop = div.scrollHeight;
-        if (ykssjs[0][3] == '') {
-            updateTime(idddsj, 5000);
-        }
-        if (ykssjs[0][4] == '') {
-            updateTime(idzxsj, 15000);
+
+            //实时监控序号
+            real_time_watch_number = real_time_watch_number + 1;
+            $('#ykssjs').append(
+                '<tr><td>' + real_time_watch_number + '</td><td>' + ykssjs[0][0] +
+                '</td><td>实验用sne指令描述语句' +
+                '</td><td>' + addr +
+                '</td><td>' + ykssjs[0][5] +
+                '</td><td>' + ykssjs[0][1] +
+                '</td><td>' + ykssjs[0][2] +
+                '</td><td id="' + idddsj + '">' + ddsjDiv +
+                '</td><td id="' + idzxsj + '">' + zxsjDiv +
+                '</td></tr>');
+            //添加完数据后，滚动条在最底部
+            var div = document.getElementById('current_watch_scroll');
+            div.scrollTop = div.scrollHeight;
+            if (ykssjs[0][3] == '') {
+                updateTime(idddsj, 5000);
+            }
+            if (ykssjs[0][4] == '') {
+                updateTime(idzxsj, 15000);
+            }
+
+            parent.window.viewJkxgjs(ykssjs[0][6]);
+
+            parent.window.viewSbztjs(ykssjs[0][7]);
+
+            ykssjs.splice(0, 1);
         }
 
-        parent.window.viewJkxgjs(ykssjs[0][6]);
-
-        parent.window.viewSbztjs(ykssjs[0][7]);
-
-        ykssjs.splice(0, 1);
     }
 
 }
@@ -102,8 +107,9 @@ function wacthOrigin() {
 //更新时间
 function updateTime(idTime, overTime) {
     setTimeout((function (ts) {
+        var times = ts.substring(0, ts.length - 4);
         return function () {
-            $('#' + ts).text(moment(ts).format('YYYY-MM-DD HH:mm:ss'));
+            $('#' + ts).text(moment(parseInt(times)).format('YYYY-MM-DD HH:mm:ss'));
         }
     })(idTime), overTime);
 }

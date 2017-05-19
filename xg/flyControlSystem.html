@@ -59,9 +59,9 @@
                             </select>
                         </li>
                         <li>任务时间:<span id="task_time">2017-05-17 14:10:00</span></li>
-                        <li style="margin-left: 30px;">GNC时（工时）：0:00:00:000</li>
-                        <li>GNC时（数管）：0:00:00:000</li>
-                        <li>数管时（工程）：0:00:00:000</li>
+                        <li style="margin-left: 30px;">GNC时：00.0</li>
+                        <li>GNC时：00.0</li>
+                        <li>数管时（工程）：00.0</li>
                         <li>数管时（数管）：<span>3:15:40:29:116</span></li>
                         <li>数据源（综合）：</li>
                     </ul>
@@ -178,8 +178,9 @@
             <div style="width: 100%;background: #d4e4f8;">
 
                 <div class="right_content_table" >
-                    <table class="flySystem_table" style="background: #d4e4f8;font-size: 14px;" width="99%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
+                    <table class="flySystem_table" style="background: #d4e4f8;font-size: 14px;table-layout: fixed;" width="99%" border="0" cellspacing="0" cellpadding="0">
+                        <tr class="wrap_word">
+                            <th>运行段</th>
                             <th>运行段</th>
                             <th>正常模式</th>
                             <th>入境</th>
@@ -191,9 +192,10 @@
                             <th></th>
                             <th>秘钥状态</th>
                             <th>初始</th>
-
+                            <th></th>
                         </tr>
-                        <tr>
+                        <tr class="wrap_word">
+                            <td style="">手动注入文件名</td>
                             <td></td>
                             <td>手动注入帧序号</td>
                             <td></td>
@@ -206,9 +208,10 @@
                             <td>预备发令序列</td>
                             <td>无预备序列</td>
                             <td>遥控发令序列</td>
-
+                            <td style="background: #007a00;">正常</td>
                         </tr>
-                        <tr>
+                        <tr class="wrap_word">
+                            <td>手动代发文件名</td>
                             <td></td>
                             <td>手动代发站址</td>
                             <td></td>
@@ -221,10 +224,11 @@
                             <td>指令代号</td>
                             <td ></td>
                             <td></td>
-
+                            <td></td>
                         </tr>
 
                         <tr>
+                            <td>手动循环指令</td>
                             <td colspan="2"> </td>
                             <td>起始帧号/指令代码</td>
                             <td></td>
@@ -235,6 +239,7 @@
                             <td>发送间隔</td>
                             <td></td>
                             <td>循环发送次数</td>
+                            <td></td>
                             <td></td>
 
                         </tr>
@@ -248,21 +253,22 @@
             </div>
             <!---右边的实时监控的表单-->
             <div class="right_content_current_table" style="background: #d2e2f6;">
-                <table id="22" class="flySystem_current_table"width="98%" border="0" cellspacing="0" cellpadding="0">
+                <table id="22" style="table-layout: fixed;" class="flySystem_current_table"width="98%" border="0" cellspacing="0" cellpadding="0">
                     <tr style="background: #96b5ea;font-size: 12px;width: 100%;">
-                        <th><div style="width: 94px;">指令代号</div> </th>
-                        <th><div style="width: 93px;">指令描述</div></th>
-                        <th><div style="width: 93px;">目的站址</div></th>
-                        <th><div style="width: 94px;">指令来源</div></th>
-                        <th><div style="width: 95px;">发令条件</div></th>
-                        <th ><div style="width: 114px;">指令发送时间</div></th>
-                        <th><div style="width: 114px;">指令到达时间</div></th>
-                        <th><div style="width: 114px;">执行时间</div></th>
+                        <th style="width: 20px;"><div >序号</div></th>
+                        <th style="width: 90px;"><div >指令代号</div> </th>
+                        <th style="width: 93px;"><div >指令描述</div></th>
+                        <th  style="width: 93px;"><div>目的站址</div></th>
+                        <th style="width: 94px;"><div >指令来源</div></th>
+                        <th style="width: 95px;"><div>发令条件</div></th>
+                        <th  style="width: 114px;"><div>指令发送时间</div></th>
+                        <th style="width: 114px;"><div >指令到达时间</div></th>
+                        <th style="width: 114px;"><div >执行时间</div></th>
                     </tr>
                 </table>
-                <div style="overflow-y:visible; overflow-x:hidden;height: 60px;">
-                    <table class="flySystem_current_table  "  width="98%" border="0" cellspacing="0" cellpadding="0"
-                    >
+                <div id="current_watch_scroll" style="overflow-y:visible; overflow-x:hidden;height: 60px;">
+                    <table class="flySystem_current_table  "  width="893px" border="0" cellspacing="0" cellpadding="0"
+                    style="table-layout: fixed;">
                         <!--<thead>
 
                         <tr style="background: #96b5ea;font-size: 12px;">
@@ -822,60 +828,63 @@
                         </tr>
                         </tbody>
                         </table>-->
-                    <table id="jkxgjs">
-                        
-                        <tbody>
+                    <div style="overflow-x: scroll;">
 
-                        <tr>
-                            <td>A发数</td>
-                            <td>备用</td>
-                            <td>A密态</td>
-                            <td>A电压正常</td>
-                            <td>A认知正确</td>
-                            <td>A密码计数</td>
-                        </tr>
-                        <tr>
-                            <td>B发数</td>
-                            <td>备用</td>
-                            <td>B密态</td>
-                            <td>B电压正常</td>
-                            <td>B认知正确</td>
-                            <td>B密码计数</td>
-                        </tr>
-                        <tr>
-                            <td>A数管有效</td>
-                            <td>AGNC有效</td>
-                            <td>A010正常</td>
-                            <td>A载荷有效</td>
-                            <td>A数据可用</td>
-                            <td>A开门</td>
-                        </tr>
-                        <tr>
-                            <td>B数管有效</td>
-                            <td>BGNC有效</td>
-                            <td>B010正常</td>
-                            <td>B载荷有效</td>
-                            <td>B数据可用</td>
-                            <td>B开门</td>
-                        </tr>
-                        <tr>
-                            <td>A应答机有效</td>
-                            <td>A解调已通</td>
-                            <td>A空转发生变化</td>
-                            <td>中继ss有效</td>
-                            <td>中继ca有效</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>B应答机有效</td>
-                            <td>B解调已通</td>
-                            <td>B空转发生变化</td>
-                            <td>中继ss有效</td>
-                            <td>中继ca有效</td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <table id="jkxgjs" width="100%" >
+
+                            <tbody>
+
+                            <tr>
+                                <td id="123">A发数</td>
+                                <td>备用</td>
+                                <td>A密态</td>
+                                <td>A电压正常</td>
+                                <td>A认知正确</td>
+                                <td>A密码计数</td>
+                            </tr>
+                            <tr>
+                                <td>B发数</td>
+                                <td>备用</td>
+                                <td>B密态</td>
+                                <td>B电压正常</td>
+                                <td>B认知正确</td>
+                                <td>B密码计数</td>
+                            </tr>
+                            <tr>
+                                <td>A数管有效</td>
+                                <td>AGNC有效</td>
+                                <td>A010正常</td>
+                                <td>A载荷有效</td>
+                                <td>A数据可用</td>
+                                <td>A开门</td>
+                            </tr>
+                            <tr>
+                                <td>B数管有效</td>
+                                <td>BGNC有效</td>
+                                <td>B010正常</td>
+                                <td>B载荷有效</td>
+                                <td>B数据可用</td>
+                                <td>B开门</td>
+                            </tr>
+                            <tr>
+                                <td>A应答机有效</td>
+                                <td>A解调已通</td>
+                                <td>A空转发生变化</td>
+                                <td>中继ss有效</td>
+                                <td>中继ca有效</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>B应答机有效</td>
+                                <td>B解调已通</td>
+                                <td>B空转发生变化</td>
+                                <td>中继ss有效</td>
+                                <td>中继ca有效</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
                 <!--设备状态-->
@@ -1025,6 +1034,8 @@
             $("#_easyui_tree_10 ").addClass("tree-node-selected");   //设置第一个节点高亮
         }
     });
+
+    //设置滚动条一直在底部
 </script>
 </body>
 </html>

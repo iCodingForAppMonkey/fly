@@ -1,9 +1,11 @@
 var startTime = new Date('2017-05-17 14:10:00').getTime();
 var redDiv = '<div style="background-color:red">&nbsp;</div>';
+//实时监控序号
+var real_time_watch_number = 0;
 $(function () {
     $('#start_btn').click(function () {
         $('#task_time').text('2017-05-17 14:10:00');
-        var number = 0;
+
         setInterval(function () {
             startTime += 1000;
             var ts = moment(startTime).format('YYYY-MM-DD HH:mm:ss');
@@ -14,7 +16,7 @@ $(function () {
     //wacthOrigin();
 });
 
-function listView(time, number) {
+function listView(time) {
     //var len=ykxljs.length;
     //    if (ykxljs[0][2] == time) {
     //        $('#ykxljs').append(
@@ -37,9 +39,10 @@ function listView(time, number) {
         if (ykssjs[0][4] == 'red') {
             zxsjDiv = redDiv;
         }
-
+        //实时监控序号
+        real_time_watch_number=real_time_watch_number+1;
         $('#ykssjs').append(
-            '<tr><td>' + ykssjs[0][0] +
+            '<tr><td>'+real_time_watch_number+'</td><td>' + ykssjs[0][0] +
             '</td><td>' +
             '</td><td>' +
             '</td><td>' + ykssjs[0][5] +
@@ -48,6 +51,9 @@ function listView(time, number) {
             '</td><td id="' + idddsj + '">' + ddsjDiv +
             '</td><td id="' + idzxsj + '">' + zxsjDiv +
             '</td></tr>');
+        //添加完数据后，滚动条在最底部
+        var div = document.getElementById('current_watch_scroll');
+        div.scrollTop = div.scrollHeight;
         if (ykssjs[0][3] == '') {
             updateTime(idddsj, 5000);
         }

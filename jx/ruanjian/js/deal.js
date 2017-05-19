@@ -12,18 +12,26 @@ $(function () {
         }, 1000);
     });
 });
+var fIndex=0;
 //列出显示的东西
 function listView(time) {
     
     if(sdzr[0][2]==time){
         $('#fffff').datagrid('insertRow', {
-            index: idx, // index start with 0
+            index: fIndex, // index start with 0
             row: {
                 code: sdzr[0][0],
                 addr: sdzr[0][1]
             }
         });
         sdzr.splice(0, 1);
+        fIndex++;
+        if(fIndex==0){
+            $('#noticeBybackground').css('background-color', 'yellow');
+            setTimeout(function () {
+                $('#noticeBybackground').css('background-color', 'white');
+            }, 60000);
+        }
     }
     
     if (ykssjs[0][2] == time) {
@@ -41,12 +49,12 @@ function listView(time) {
                 zxsj: ''
             }
         });
-        if (ykssjs[0][5] == '手动') {
-            $('#noticeBybackground').css('background-color', 'yellow');
-            setTimeout(function () {
-                $('#noticeBybackground').css('background-color', 'white');
-            }, 60000);
-        }
+//        if (ykssjs[0][5] == '手动') {
+//            $('#noticeBybackground').css('background-color', 'yellow');
+//            setTimeout(function () {
+//                $('#noticeBybackground').css('background-color', 'white');
+//            }, 60000);
+//        }
         //到达时间，执行时间处理
         jstimes(idx, ykssjs[0][3], ykssjs[0][4]);
 

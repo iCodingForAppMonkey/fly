@@ -4,7 +4,7 @@ div,span,li,ul,body,img,table,tr{
     font-family: 微软雅黑；
 }
 .wrapper{
-    width:1200px;
+    width:1380px;
     margin:0 auto;
 }
 .top_header{
@@ -81,7 +81,7 @@ div,span,li,ul,body,img,table,tr{
 }
 /*标题下的表格部分设置*/
 .right_content_table{
-    width: 908px;
+    width: 1044px;
     border: 2px inset #000;
 
 }
@@ -153,8 +153,15 @@ div,span,li,ul,body,img,table,tr{
 .flySystem_current_table tr td:nth-child(9){ width: 114px;}
 
 /*遥控序列监视*/
-.sequence_watch_box,.publish_order_box{
-    width:25%;
+.sequence_watch_box{
+     width:344px;
+    border:2px solid #000000;
+    border-right: none;
+    height:inherit;
+    float: left;
+}
+.publish_order_box{
+    width:200px;
     border:2px solid #000000;
     border-right: none;
     height:inherit;
@@ -178,7 +185,7 @@ div,span,li,ul,body,img,table,tr{
 
 /*控制效果监视*/
 .control_effect_box{
-    width:28%;
+    width:305px;
     border:2px solid #000000;
 
     float: left;
@@ -186,7 +193,7 @@ div,span,li,ul,body,img,table,tr{
 }
 /*设备状态监视*/
 .device_status_box{
-    width:190px;
+    width:185px;
     border:2px solid #000000;
     border-left:none;
     float: left;
@@ -205,7 +212,6 @@ div,span,li,ul,body,img,table,tr{
     margin: 0;
     border-color: #ccc;
     padding: 0 4px;
-    white-space: nowrap;
     word-wrap: normal;
     overflow: hidden;
     height: 18px;
@@ -232,4 +238,7 @@ div,span,li,ul,body,img,table,tr{
 }
 .control_effect_table,.flySystem_current_table{
     font-size: 14px;
+}
+.datagrid-view2 > .datagrid-body{
+    overflow-x: hidden;
 }

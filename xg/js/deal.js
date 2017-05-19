@@ -39,12 +39,24 @@ function listView(time) {
         if (ykssjs[0][4] == 'red') {
             zxsjDiv = redDiv;
         }
+        var yl = ykxljs.length,
+            addr = '';
+        if(ykssjs[0][0]=='SD101'){
+             addr = 'LM';
+        }else{
+            for (var y = 0; y < yl; y++) {
+                if (ykxljs[y][0] == ykssjs[0][0]) {
+                    addr = ykxljs[y][1];
+                }
+            }
+        }
+        
         //实时监控序号
-        real_time_watch_number=real_time_watch_number+1;
+        real_time_watch_number = real_time_watch_number + 1;
         $('#ykssjs').append(
-            '<tr><td>'+real_time_watch_number+'</td><td>' + ykssjs[0][0] +
+            '<tr><td>' + real_time_watch_number + '</td><td>' + ykssjs[0][0] +
             '</td><td>实验用sne指令描述语句' +
-            '</td><td>' +
+            '</td><td>' + addr +
             '</td><td>' + ykssjs[0][5] +
             '</td><td>' + ykssjs[0][1] +
             '</td><td>' + ykssjs[0][2] +

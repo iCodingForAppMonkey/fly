@@ -26,12 +26,11 @@ function listView(time) {
         });
         sdzr.splice(0, 1);
         
-        if(fIndex==0){
             $('#noticeBybackground').css('background-color', 'yellow');
             setTimeout(function () {
                 $('#noticeBybackground').css('background-color', 'white');
             }, 60000);
-        }
+        
         fIndex++;
     }
     

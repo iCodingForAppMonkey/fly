@@ -12,55 +12,59 @@ $(function () {
         }, 1000);
     });
 });
-var fIndex=0;
+var fIndex = 0;
 //列出显示的东西
 function listView(time) {
-    
-    if(sdzr[0][2]==time){
-        $('#fffff').datagrid('insertRow', {
-            index: fIndex, // index start with 0
-            row: {
-                code: sdzr[0][0],
-                addr: sdzr[0][1]
-            }
-        });
-        sdzr.splice(0, 1);
-        
+    if (sdzr[0]) {
+        if (sdzr[0][2] == time) {
+            $('#fffff').datagrid('insertRow', {
+                index: fIndex, // index start with 0
+                row: {
+                    code: sdzr[0][0],
+                    addr: sdzr[0][1]
+                }
+            });
+            sdzr.splice(0, 1);
+
             $('#noticeBybackground').css('background-color', 'yellow');
             setTimeout(function () {
                 $('#noticeBybackground').css('background-color', 'white');
             }, 60000);
-        
-        fIndex++;
-    }
-    
-    if (ykssjs[0][2] == time) {
-        var idx = $('#ykssjs').datagrid('getRows').length;
 
-        $('#ykssjs').datagrid('insertRow', {
-            index: idx, // index start with 0
-            row: {
-                no: $('#ykssjs').datagrid('getRows').length + 1,
-                code: ykssjs[0][0],
-                proxyno: ykssjs[0][5],
-                fltj: ykssjs[0][1],
-                fssj: ykssjs[0][2],
-                ddsj: '',
-                zxsj: ''
-            }
-        });
-        if (ykssjs[0][5] == '手动') {
-            $('#noticeBybackground').css('background-color', 'white');
+            fIndex++;
         }
-        //到达时间，执行时间处理
-        jstimes(idx, ykssjs[0][3], ykssjs[0][4]);
-
-        parent.window.viewJkxgjs(ykssjs[0][6]);
-
-        parent.window.viewSbztjs(ykssjs[0][7]);
-
-        ykssjs.splice(0, 1);
     }
+    if (ykssjs[0]) {
+
+        if (ykssjs[0][2] == time) {
+            var idx = $('#ykssjs').datagrid('getRows').length;
+
+            $('#ykssjs').datagrid('insertRow', {
+                index: idx, // index start with 0
+                row: {
+                    no: $('#ykssjs').datagrid('getRows').length + 1,
+                    code: ykssjs[0][0],
+                    proxyno: ykssjs[0][5],
+                    fltj: ykssjs[0][1],
+                    fssj: ykssjs[0][2],
+                    ddsj: '',
+                    zxsj: ''
+                }
+            });
+            if (ykssjs[0][5] == '手动') {
+                $('#noticeBybackground').css('background-color', 'white');
+            }
+            //到达时间，执行时间处理
+            jstimes(idx, ykssjs[0][3], ykssjs[0][4]);
+
+            parent.window.viewJkxgjs(ykssjs[0][6]);
+
+            parent.window.viewSbztjs(ykssjs[0][7]);
+
+            ykssjs.splice(0, 1);
+        }
+    }
+
 }
 
 function jstimes(idx, ddsj, zxsj) {

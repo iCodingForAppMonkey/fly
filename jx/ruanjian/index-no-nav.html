@@ -236,7 +236,7 @@
         <!-- tab -->
         <div id="tt" class="easyui-tabs" style="width:100%;height:703px;">
             <div title="综合监视">
-                <iframe scrolling="auto" frameborder="0"  src="zh-watch.html" style="width:100%;height:100%;"></iframe>
+                <iframe scrolling="auto" frameborder="0"  src="zh-watch.html" style="width:100%;height:98%;"></iframe>
             </div>
         </div>
 
@@ -263,7 +263,7 @@
         if ($('#tt').tabs('exists', title)){
             $('#tt').tabs('select', title);
         } else {
-            var content = '<iframe frameborder="0"  src="'+url+'" style="overflow-y:hidden;width:100%;height:100%;"></iframe>';
+            var content = '<iframe frameborder="0"  src="'+url+'" style="overflow-y:hidden;width:100%;height:98%;"></iframe>';
             $('#tt').tabs('add',{
                 title:title,
                 content:content,

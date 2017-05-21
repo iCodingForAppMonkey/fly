@@ -17,7 +17,7 @@ $(function () {
     });
 });
 var fIndex = 0;
-//列出显示的东西
+//列出显示的东西测试一下
 function listView(time) {
     if (sdzr[0]) {
         if (sdzr[0][2] == time) {

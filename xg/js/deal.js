@@ -2,16 +2,19 @@ var startTime = new Date('2017-05-17 14:10:00').getTime();
 var redDiv = '<div style="background-color:red">&nbsp;</div>';
 //实时监控序号
 var real_time_watch_number = 0;
+var timer=null;
 $(function () {
     $('#start_btn').click(function () {
-        $('#task_time').text('2017-05-17 14:10:00');
+        if(timer==null){
+            $('#task_time').text('2017-05-17 14:10:00');
 
-        setInterval(function () {
-            startTime += 1000;
-            var ts = moment(startTime).format('YYYY-MM-DD HH:mm:ss');
-            $('#task_time').text(ts);
-            listView(ts);
-        }, 1000);
+            timer=setInterval(function () {
+                startTime += 1000;
+                var ts = moment(startTime).format('YYYY-MM-DD HH:mm:ss');
+                $('#task_time').text(ts);
+                listView(ts);
+            }, 1000);
+        }
     });
     //wacthOrigin();
 });

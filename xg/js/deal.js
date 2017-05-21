@@ -73,6 +73,10 @@ function listView(time) {
                 '</td><td id="' + idddsj + '">' + ddsjDiv +
                 '</td><td id="' + idzxsj + '">' + zxsjDiv +
                 '</td></tr>');
+            if(real_time_watch_number==4){
+                var scrollWidth=$('#current_watch_scroll')[0].offsetWidth-$('#current_watch_scroll')[0].scrollWidth;
+                $('#tatolWidth').width(1046-scrollWidth);
+            }
             //添加完数据后，滚动条在最底部
             var div = document.getElementById('current_watch_scroll');
             div.scrollTop = div.scrollHeight;
